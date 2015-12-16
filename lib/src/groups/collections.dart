@@ -9,20 +9,48 @@ class Collections {
 
   Collections(this._core);
 
-  /// Get the basic movie information for a specific movie id.
+  /// Get the basic collection information for a specific collection id.
+  ///
+  /// You can get the ID needed for this method by making a `tmdb.movies.getInfo(ID)` request and paying attention to the `belongs_to_collection` hash.
+  /// Movie parts are not sorted in any particular order. If you would like to sort them yourself you can use the provided `release_date`.
   ///
   ///     // Basic usage
-  ///     Map result = await tmdb.movies.getById('105');
+  ///     Map result = await tmdb.collections.getInfo('264');
   ///
   ///     // Get results in Spanish
-  ///     Map result = await tmdb.movies.getById('105', language: 'es');
+  ///     Map result = await tmdb.collections.getInfo('264', language: 'es');
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map result = await tmdb.movies.getById('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.collections.getInfo('264', append: ['trailers', 'reviews']);
   Future<Map> getInfo(String id, {String language, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id', params: params);
+    return _core.doQuery('collection/$id', params: params);
+  }
+
+  /// Get all of the images for a particular collection by collection id.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.collections.getImages('264');
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.collections.getImages('264', language: 'es');
+  ///
+  ///     // Get results in the default language plus in Russian and German.
+  ///     // Maximum 5 extra languages per request
+  ///     Map result = await tmdb.collections.getImages('264', includeLanguage: ['ru', 'de']);
+  ///
+  ///     // Get results plus trailers and reviews
+  ///     Map result = await tmdb.collections.getInfo('264', append: ['trailers', 'reviews']);
+  Future<Map> getImages(String id,
+      {String language, List<String> append, List<String> includeLanguage}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'language', value: language);
+    _addParam(params, 'append_to_response', list: append);
+    _addParam(params, 'include_image_language', list: includeLanguage);
+    return _core.doQuery('collection/$id/images', params: params);
   }
 }

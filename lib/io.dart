@@ -19,7 +19,7 @@ class TMDBApi extends TMDBApiCore {
     HttpClient client = req.client ?? new HttpClient();
     HttpClientRequest request = await client.openUrl(req.method, req.uri);
 
-    if (req.method == 'post') {
+    if (req.method == 'POST') {
       request.add(req.data.codeUnits);
       await request.flush();
     }

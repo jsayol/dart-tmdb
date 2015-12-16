@@ -9,10 +9,14 @@ class Networks {
 
   Networks(this._core);
 
-  /// Retrieves xxxx
+  /// This method is used to retrieve the basic information about a TV network.
   ///
-  ///     Map result = tmdbApi.networks.get();
-  get() {
-    return _core;
+  /// You can use this ID to search for TV shows with the discover. At this time we don't have much but this will be fleshed out over time.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.networks.getInfo('5558aea6c3a3687774008f11');
+  Future<Map> getInfo(String id) {
+    _checkNotNull(id, 'id');
+    return _core.doQuery('network/$id');
   }
 }

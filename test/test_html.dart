@@ -1,6 +1,6 @@
 import 'package:tmdb/html.dart';
 
-TMDBApi tmdbApi = new TMDBApi('306b27f6d4bfe68442cd66152d01a134');
+TMDBApi tmdb = new TMDBApi('306b27f6d4bfe68442cd66152d01a134');
 
 // main() async {
 //   Map info = await tmdb.movies.getInfo('105', append: ['trailers', 'alternative_titles']);

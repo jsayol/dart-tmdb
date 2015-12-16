@@ -12,15 +12,16 @@ class Movies {
   /// Get the basic movie information for a specific movie id.
   ///
   ///     // Basic usage
-  ///     Map result = await tmdb.movies.getById('105');
+  ///     Map result = await tmdb.movies.getInfo('105');
   ///
   ///     // Get results in Spanish
-  ///     Map result = await tmdb.movies.getById('105', language: 'es');
+  ///     Map result = await tmdb.movies.getInfo('105', language: 'es');
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map result = await tmdb.movies.getById('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.movies.getInfo('105', append: ['trailers', 'reviews']);
   Future<Map> getInfo(String id, {String language, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id', params: params);
@@ -46,6 +47,7 @@ class Movies {
   Future<Map> getAlternativeTitles(String id,
       {String country, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'country', value: country);
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id/alternative_titles', params: params);
@@ -60,6 +62,7 @@ class Movies {
   ///     Map result = await tmdb.movies.getCredits('105', append: ['trailers', 'reviews']);
   Future<Map> getCredits(String id, {List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id/credits', params: params);
   }
@@ -81,6 +84,7 @@ class Movies {
   Future<Map> getImages(String id,
       {String language, List<String> append, List<String> includeLanguage}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
     _addParam(params, 'include_image_language', list: includeLanguage);
@@ -96,6 +100,7 @@ class Movies {
   ///     Map result = await tmdb.movies.getKeywords('105', append: ['trailers', 'reviews']);
   Future<Map> getKeywords(String id, {List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id/keywords', params: params);
   }
@@ -109,6 +114,7 @@ class Movies {
   ///     Map result = await tmdb.movies.getReleases('105', append: ['trailers', 'reviews']);
   Future<Map> getReleases(String id, {List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id/releases', params: params);
   }
@@ -125,6 +131,7 @@ class Movies {
   ///     Map infoWithAppend = await tmdb.movies.getVideos('105', append: ['trailers', 'reviews']);
   Future<Map> getVideos(String id, {String language, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id/videos', params: params);
@@ -139,6 +146,7 @@ class Movies {
   ///     Map infoWithAppend = await tmdb.movies.getTranslations('105', append: ['trailers', 'reviews']);
   Future<Map> getTranslations(String id, {List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
     return _core.doQuery('movie/$id/translations', params: params);
   }
@@ -159,6 +167,7 @@ class Movies {
   Future<Map> getSimilar(String id,
       {int page, String language, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
@@ -181,6 +190,7 @@ class Movies {
   Future<Map> getReviews(String id,
       {int page, String language, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
@@ -203,6 +213,7 @@ class Movies {
   Future<Map> getLists(String id,
       {int page, String language, List<String> append}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
@@ -223,6 +234,7 @@ class Movies {
   ///     Map infoSpanish = await tmdb.movies.getChanges('105', endDate: '2015-10-21');
   Future<Map> getChanges(String id, {String startDate, String endDate}) {
     Map params = {};
+    _checkNotNull(id, 'id');
     _addParam(params, 'start_date', value: startDate);
     _addParam(params, 'end_date', value: endDate);
     return _core.doQuery('movie/$id/changes', params: params);

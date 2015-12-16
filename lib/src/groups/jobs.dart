@@ -9,10 +9,11 @@ class Jobs {
 
   Jobs(this._core);
 
-  /// Retrieves xxxx
+  /// Get a list of valid jobs.
   ///
-  ///     Map result = tmdbApi.jobs.get();
-  get() {
-    return _core;
+  ///     // Basic usage
+  ///     Map result = await tmdb.jobs.getList();
+  Future<Map> getList() {
+    return _core.doQuery('mjob/list');
   }
 }

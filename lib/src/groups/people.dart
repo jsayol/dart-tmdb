@@ -9,10 +9,152 @@ class People {
 
   People(this._core);
 
-  /// Retrieves xxxx
+  /// Get the general person information for a specific id.
   ///
-  ///     Map result = tmdbApi.people.get();
-  get() {
-    return _core;
+  ///     // Basic usage
+  ///     Map result = await tmdb.people.getInfo('521');
+  ///
+  ///     // Get results plus images and TV credits
+  ///     Map result = await tmdb.people.getInfo('521', append: ['images', 'tv_credits']);
+  Future<Map> getCredits(String id, {List<String> append}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'append_to_response', list: append);
+    return _core.doQuery('person/$id', params: params);
+  }
+
+  /// Get the movie credits for a specific person id.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.people.getMovieCredits('521');
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.people.getMovieCredits('521', language: 'es');
+  ///
+  ///     // Get results plus images and TV credits
+  ///     Map result = await tmdb.people.getMovieCredits('521', append: ['images', 'tv_credits']);
+  Future<Map> getMovieCredits(String id,
+      {String language, List<String> append}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'language', value: language);
+    _addParam(params, 'append_to_response', list: append);
+    return _core.doQuery('person/$id/movie_credits', params: params);
+  }
+
+  /// Get the TV credits for a specific person id.
+  ///
+  /// To get the expanded details for each record, call the /credit method with the provided credit_id. This will provide details about which episode and/or season the credit is for.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.people.getTvCredits('521');
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.people.getTvCredits('521', language: 'es');
+  ///
+  ///     // Get results plus images and movie credits
+  ///     Map result = await tmdb.people.getTvCredits('521', append: ['images', 'movie_credits']);
+  Future<Map> getTvCredits(String id, {String language, List<String> append}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'language', value: language);
+    _addParam(params, 'append_to_response', list: append);
+    return _core.doQuery('person/$id/tv_credits', params: params);
+  }
+
+  /// Get the combined (movie and TV) credits for a specific person id.
+  ///
+  /// To get the expanded details for each TV record, call the /credit method with the provided credit_id. This will provide details about which episode and/or season the credit is for.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.people.getCombinedCredits('521');
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.people.getCombinedCredits('521', language: 'es');
+  ///
+  ///     // Get results plus images
+  ///     Map result = await tmdb.people.getCombinedCredits('521', append: ['images']);
+  Future<Map> getCombinedCredits(String id,
+      {String language, List<String> append}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'language', value: language);
+    _addParam(params, 'append_to_response', list: append);
+    return _core.doQuery('person/$id/combined_credits', params: params);
+  }
+
+  /// Get the external ids for a specific person id.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.people.getExternalIds('521');
+  Future<Map> getExternalIds(String id) {
+    _checkNotNull(id, 'id');
+    return _core.doQuery('person/$id/external_ids');
+  }
+
+  /// Get the images for a specific person id.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.people.getImages('521');
+  Future<Map> getImages(String id) {
+    _checkNotNull(id, 'id');
+    return _core.doQuery('person/$id/images');
+  }
+
+  /// Get the images that have been tagged with a specific person id.
+  ///
+  /// All of the image results are returned by the API with a `media` object mapped for each image.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.people.getTaggedImages('521');
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.people.getTaggedImages('521', language: 'es');
+  ///
+  ///     // Get second page of results
+  ///     Map result = await tmdb.people.getTaggedImages('521', page: 2);
+  Future<Map> getTaggedImages(String id, {int page, String language}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'page', value: page);
+    _addParam(params, 'language', value: language);
+    return _core.doQuery('person/$id/tagged_images', params: params);
+  }
+
+  /// Get the changes for a specific person id.
+  ///
+  /// Changes are grouped by key, and ordered by date in descending order. By default, only the last 24 hours of changes are returned. The maximum number of days that can be returned in a single request is 14. The language is present on fields that are translatable.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.people.getChanges('521');
+  ///
+  ///     // Get results starting from October 21st, 2015
+  ///     Map result = await tmdb.people.getChanges('521', startDate: '2015-10-21');
+  Future<Map> getChanges(String id, {String startDate, String endDate}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'start_date', value: startDate);
+    _addParam(params, 'end_date', value: endDate);
+    return _core.doQuery('person/$id/changes', params: params);
+  }
+
+  /// Get the list of popular people on The Movie Database.
+  ///
+  /// This list refreshes every day.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.people.getPopular();
+  Future<Map> getPopular({int page}) {
+    Map params = {};
+    _addParam(params, 'page', value: page);
+    return _core.doQuery('person/popular', params: params);
+  }
+
+  /// Get the latest person id.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.people.getLatest();
+  Future<Map> getLatest() {
+    return _core.doQuery('person/latest');
   }
 }

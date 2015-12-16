@@ -9,10 +9,30 @@ class Keywords {
 
   Keywords(this._core);
 
-  /// Retrieves xxxx
+  /// Get the basic information for a specific keyword id.
   ///
-  ///     Map result = tmdbApi.keywords.get();
-  get() {
-    return _core;
+  ///     // Usage
+  ///     Map result = await tmdb.keywords.getInfo('105');
+  Future<Map> getInfo(String id) {
+    _checkNotNull(id, 'id');
+    return _core.doQuery('keyword/$id');
+  }
+
+  /// Get the list of movies for a particular keyword by id.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.keywords.getMovies('878');
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.keywords.getMovies('878', language: 'es');
+  ///
+  ///     // Get second page of results
+  ///     Map result = await tmdb.keywords.getMovies('878', page: 2);
+  Future<Map> getMovies(String id, {int page, String language}) {
+    Map params = {};
+    _checkNotNull(id, 'id');
+    _addParam(params, 'page', value: page);
+    _addParam(params, 'language', value: language);
+    return _core.doQuery('keyword/$id/movies', params: params);
   }
 }

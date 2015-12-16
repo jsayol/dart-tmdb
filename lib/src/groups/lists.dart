@@ -9,10 +9,61 @@ class Lists {
 
   Lists(this._core);
 
-  /// Retrieves xxxx
+  /// Get a list by id.
   ///
-  ///     Map result = tmdbApi.lists.get();
-  get() {
-    return _core;
+  ///     // Usage
+  ///     Map result = await tmdb.lists.getInfo('5558aea6c3a3687774008f11');
+  Future<Map> getInfo(String id) {
+    _checkNotNull(id, 'id');
+    return _core.doQuery('list/$id');
+  }
+
+  /// Delete a list by id.
+  ///
+  /// TODO
+  Future<Map> deleteById(id) {
+    return new Future(() => null);
+  }
+
+  /// Check to see if a movie ID is already added to a list.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.lists.checkStatus('5558aea6c3a3687774008f11');
+  Future<Map> checkStatus(String listId, String movieId) {
+    Map params = {};
+    _checkNotNull(listId, 'listId');
+    _checkNotNull(movieId, 'movieId');
+    _addParam(params, 'movie_id', value: movieId);
+    return _core.doQuery('list/$listId/item_status');
+  }
+
+  /// This method lets users create a new list. A valid session id is required.
+  ///
+  /// TODO
+  Future<Map> create() {
+    return new Future(() => null);
+  }
+
+  /// This method lets users add new movies to a list that they created. A valid session id is required.
+  ///
+  /// TODO
+  Future<Map> addItem(id) {
+    return new Future(() => null);
+  }
+
+  /// This method lets users delete movies from a list that they created. A valid session id is required.
+  ///
+  /// TODO
+  Future<Map> removeItem(id) {
+    return new Future(() => null);
+  }
+
+  /// Clear all of the items within a list.
+  ///
+  /// This is a irreversible action and should be treated with caution. A valid session id is required. A call without confirm=true will return status code 29.
+  ///
+  /// TODO
+  Future<Map> clear(id) {
+    return new Future(() => null);
   }
 }
