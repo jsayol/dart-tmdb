@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Collections' API calls
-class _Collections {
-  final TmdbApiCore _core;
+/// Handles the 'Authentication' API calls
+class Authentication {
+  final TMDBApiCore _core;
 
-  _Collections(this._core);
+  Authentication(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.collections.get();
+  ///     Map result = tmdbApi.authentication.get();
   get() {
     return _core;
   }

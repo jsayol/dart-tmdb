@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Search' API calls
-class _Search {
-  final TmdbApiCore _core;
+/// Handles the 'Companies' API calls
+class Companies {
+  final TMDBApiCore _core;
 
-  _Search(this._core);
+  Companies(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.search.get();
+  ///     Map result = tmdbApi.companies.get();
   get() {
     return _core;
   }

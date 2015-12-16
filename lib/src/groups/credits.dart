@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Tv' API calls
-class _Tv {
-  final TmdbApiCore _core;
+/// Handles the 'Credits' API calls
+class Credits {
+  final TMDBApiCore _core;
 
-  _Tv(this._core);
+  Credits(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.tv.get();
+  ///     Map result = tmdbApi.credits.get();
   get() {
     return _core;
   }

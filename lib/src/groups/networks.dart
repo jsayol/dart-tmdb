@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Configuration' API calls
-class _Configuration {
-  final TmdbApiCore _core;
+/// Handles the 'Networks' API calls
+class Networks {
+  final TMDBApiCore _core;
 
-  _Configuration(this._core);
+  Networks(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.configuration.get();
+  ///     Map result = tmdbApi.networks.get();
   get() {
     return _core;
   }

@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Genres' API calls
-class _Genres {
-  final TmdbApiCore _core;
+/// Handles the 'Tvseasons' API calls
+class Tvseasons {
+  final TMDBApiCore _core;
 
-  _Genres(this._core);
+  Tvseasons(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.genres.get();
+  ///     Map result = tmdbApi.tvseasons.get();
   get() {
     return _core;
   }

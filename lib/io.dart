@@ -8,22 +8,38 @@ library tmdb.io;
 
 import 'dart:io';
 import 'dart:async';
+import 'dart:convert';
 
-import 'package:tmdb/src/core.dart';
+import 'package:tmdb/core.dart';
 
-class TmdbApi extends TmdbApiCore {
-  TmdbApi(String apiKey, {bool https: false}) : super(apiKey, https: https);
+class TMDBApi extends TMDBApiCore {
+  TMDBApi(String apiKey, {bool https: false}) : super(apiKey, https: https);
 
   @override Future<String> makeRequest(Request req) async {
-    HttpClient client = new HttpClient();
+    HttpClient client = req.client ?? new HttpClient();
     HttpClientRequest request = await client.openUrl(req.method, req.uri);
+
     if (req.method == 'post') {
       request.add(req.data.codeUnits);
       await request.flush();
     }
+
     HttpClientResponse response = await request.close();
-    client.close();
-    List<int> resp = await response.fold([], (List prev, elem)=> prev..addAll(elem));
-    return new String.fromCharCodes(resp);
+
+    if (response.statusCode == 429) {
+      // The request rate limit has been exceeded. Let's retry after the
+      // number of seconds that we get from the respinse headers, plus an
+      // extra 500 ms for safety.
+      int retryAfter = int.parse(response.headers.value('Retry-After'));
+      print("Retry-After: $retryAfter");
+      Duration delay = new Duration(milliseconds: 500 + 1000 * retryAfter);
+      return await new Future.delayed(delay, () => makeRequest(req..client = client));
+    } else {
+      client.close(force: true);
+      List<int> resp =
+          await response.fold([], (List prev, elem) => prev..addAll(elem));
+      // return new String.fromCharCodes(resp);
+      return UTF8.decode(resp);
+    }
   }
 }

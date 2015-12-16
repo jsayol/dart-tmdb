@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Companies' API calls
-class _Companies {
-  final TmdbApiCore _core;
+/// Handles the 'Lists' API calls
+class Lists {
+  final TMDBApiCore _core;
 
-  _Companies(this._core);
+  Lists(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.companies.get();
+  ///     Map result = tmdbApi.lists.get();
   get() {
     return _core;
   }

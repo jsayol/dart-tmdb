@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Reviews' API calls
-class _Reviews {
-  final TmdbApiCore _core;
+/// Handles the 'Jobs' API calls
+class Jobs {
+  final TMDBApiCore _core;
 
-  _Reviews(this._core);
+  Jobs(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.reviews.get();
+  ///     Map result = tmdbApi.jobs.get();
   get() {
     return _core;
   }

@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'People' API calls
-class _People {
-  final TmdbApiCore _core;
+/// Handles the 'Configuration' API calls
+class Configuration {
+  final TMDBApiCore _core;
 
-  _People(this._core);
+  Configuration(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.people.get();
+  ///     Map result = tmdbApi.configuration.get();
   get() {
     return _core;
   }

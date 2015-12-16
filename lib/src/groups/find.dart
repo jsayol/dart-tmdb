@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Discover' API calls
-class _Discover {
-  final TmdbApiCore _core;
+/// Handles the 'Find' API calls
+class Find {
+  final TMDBApiCore _core;
 
-  _Discover(this._core);
+  Find(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.discover.get();
+  ///     Map result = tmdbApi.find.get();
   get() {
     return _core;
   }

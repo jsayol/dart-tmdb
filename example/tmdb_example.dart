@@ -6,6 +6,6 @@ library tmdb.example;
 // import 'package:tmdb/tmdb.dart';
 
 main() {
-  // var awesome = new TmdbApi('KEY');
+  // var awesome = new TMDBApi('KEY');
   // print('awesome: ${awesome.isAwesome}');
 }

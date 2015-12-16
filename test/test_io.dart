@@ -1,17 +1,22 @@
 import 'package:tmdb/io.dart';
 
-main() async {
-  TmdbApi tmdbApi = new TmdbApi('306b27f6d4bfe68442cd66152d01a134');
-  // var resp = await tmdbApi.doQuery('movie/256274');
+TMDBApi tmdbApi = new TMDBApi('306b27f6d4bfe68442cd66152d01a134');
 
-  // var resp1 = await tmdbApi.movies.getById('105');
-  // var resp2 = await tmdbApi.movies.getById('105', language: 'es');
-  // var resp3 = await tmdbApi.movies.getById('105', append: ['trailers']);
-  var resp3 = await tmdbApi.movies.getById('105', language: 'es', append: ['trailers']);
+// main() async {
+//   Map info = await tmdb.movies.getInfo('105', append: ['trailers', 'alternative_titles']);
+//   print(JSON.encode(info));
+// }
 
-  // print("resp1 = $resp1");
-  // print("resp2 = $resp2");
-  print("resp3 = $resp3");
+getAlternativeTitles(int i) async {
+  Map ret = await tmdb.movies.getAlternativeTitles('105', country: 'es');
+  print("$i = ${ret['titles'][0]['title']}");
+}
 
-  return;
+void main() {
+  for (int i=0; i<45; i++) {
+    print("Request $i...");
+    getAlternativeTitles(i);
+  }
+
+  print("Loop done");
 }

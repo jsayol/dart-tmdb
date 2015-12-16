@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the '_CLASSNAME_' API calls
-class __CLASSNAME_ {
-  final TmdbApiCore _core;
+/// Handles the 'Genres' API calls
+class Genres {
+  final TMDBApiCore _core;
 
-  __CLASSNAME_(this._core);
+  Genres(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi._CLASSNAMELC_.get();
+  ///     Map result = tmdbApi.genres.get();
   get() {
     return _core;
   }

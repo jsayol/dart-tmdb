@@ -20,3 +20,7 @@ doc/api/
 *.iml
 *.ipr
 *.iws
+
+# Other files
+lib/src/_template_.dart
+lib/src/c.sh

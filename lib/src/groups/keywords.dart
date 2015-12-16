@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Certifications' API calls
-class _Certifications {
-  final TmdbApiCore _core;
+/// Handles the 'Keywords' API calls
+class Keywords {
+  final TMDBApiCore _core;
 
-  _Certifications(this._core);
+  Keywords(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.certifications.get();
+  ///     Map result = tmdbApi.keywords.get();
   get() {
     return _core;
   }

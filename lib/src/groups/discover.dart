@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Networks' API calls
-class _Networks {
-  final TmdbApiCore _core;
+/// Handles the 'Discover' API calls
+class Discover {
+  final TMDBApiCore _core;
 
-  _Networks(this._core);
+  Discover(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.networks.get();
+  ///     Map result = tmdbApi.discover.get();
   get() {
     return _core;
   }

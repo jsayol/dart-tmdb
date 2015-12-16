@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Timezones' API calls
-class _Timezones {
-  final TmdbApiCore _core;
+/// Handles the 'Tv' API calls
+class Tv {
+  final TMDBApiCore _core;
 
-  _Timezones(this._core);
+  Tv(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.timezones.get();
+  ///     Map result = tmdbApi.tv.get();
   get() {
     return _core;
   }

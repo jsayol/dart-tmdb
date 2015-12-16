@@ -9,7 +9,7 @@ A simple usage example:
     import 'package:tmdb/tmdb.dart';
 
     main() {
-      var tmdbApi = new TmdbApi('your_API_key_here');
+      var tmdbApi = new TMDBApi('your_API_key_here');
     }
 
 ## Features and bugs

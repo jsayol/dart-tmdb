@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Credits' API calls
-class _Credits {
-  final TmdbApiCore _core;
+/// Handles the 'Timezones' API calls
+class Timezones {
+  final TMDBApiCore _core;
 
-  _Credits(this._core);
+  Timezones(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.credits.get();
+  ///     Map result = tmdbApi.timezones.get();
   get() {
     return _core;
   }

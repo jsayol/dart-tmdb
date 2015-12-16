@@ -3,15 +3,15 @@
 
 part of tmdb.core;
 
-/// Handles the 'Account' API calls
-class _Account {
-  final TmdbApiCore _core;
+/// Handles the 'Tvepisodes' API calls
+class Tvepisodes {
+  final TMDBApiCore _core;
 
-  _Account(this._core);
+  Tvepisodes(this._core);
 
   /// Retrieves xxxx
   ///
-  ///     Map result = tmdbApi.account.get();
+  ///     Map result = tmdbApi.tvepisodes.get();
   get() {
     return _core;
   }
