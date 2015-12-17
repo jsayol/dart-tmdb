@@ -24,3 +24,4 @@ doc/api/
 # Other files
 lib/src/_template_.dart
 lib/src/c.sh
+test
