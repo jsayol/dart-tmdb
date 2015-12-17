@@ -20,16 +20,16 @@ class Changes {
     return _core._query('movie/changes');
   }
 
-    /// Get a list of people ids that have been edited.
-    ///
-    /// By default we show the last 24 hours and only 100 items per page. The maximum number of days that can be returned in a single request is 14. You can then use the person changes API to get the actual data that has been changed.
-    /// Please note: the change log system to support this was changed on October 5, 2012 and will only show people that have been edited since.
-    ///
-    ///     // Usage
-    ///     Map result = await tmdb.changes.getPeople();
-    Future<Map> getPeople() {
-      return _core._query('person/changes');
-    }
+  /// Get a list of people ids that have been edited.
+  ///
+  /// By default we show the last 24 hours and only 100 items per page. The maximum number of days that can be returned in a single request is 14. You can then use the person changes API to get the actual data that has been changed.
+  /// Please note: the change log system to support this was changed on October 5, 2012 and will only show people that have been edited since.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.changes.getPeople();
+  Future<Map> getPeople() {
+    return _core._query('person/changes');
+  }
 
   /// Get a list of TV show ids that have been edited.
   ///
