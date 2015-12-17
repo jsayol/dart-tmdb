@@ -15,6 +15,6 @@ class Reviews {
   ///     Map result = await tmdb.reviews.getInfo('521');
   Future<Map> getInfo(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('review/$id');
+    return _core._query('review/$id');
   }
 }

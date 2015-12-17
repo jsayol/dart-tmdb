@@ -26,7 +26,7 @@ class TvSeasons {
     _checkNotNull(seasonNumber, 'seasonNumber');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('tv/$showId/season/$seasonNumber', params: params);
+    return _core._query('tv/$showId/season/$seasonNumber', params: params);
   }
 
   /// Look up a TV season's changes by season ID.
@@ -46,7 +46,7 @@ class TvSeasons {
     _checkNotNull(id, 'id');
     _addParam(params, 'start_date', value: startDate);
     _addParam(params, 'end_date', value: endDate);
-    return _core.doQuery('tv/season/$id/changes', params: params);
+    return _core._query('tv/season/$id/changes', params: params);
   }
 
   /// This method lets users get the status of whether or not the TV episodes of a season have been rated.
@@ -65,7 +65,7 @@ class TvSeasons {
   Future<Map> getCredits(String showId, int seasonNumber) {
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
-    return _core.doQuery('tv/$showId/season/$seasonNumber/credits');
+    return _core._query('tv/$showId/season/$seasonNumber/credits');
   }
 
   /// Get the external ids that we have stored for a TV season by season number.
@@ -81,7 +81,7 @@ class TvSeasons {
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/$showId/season/$seasonNumber/external_ids',
+    return _core._query('tv/$showId/season/$seasonNumber/external_ids',
         params: params);
   }
 
@@ -102,7 +102,7 @@ class TvSeasons {
     _checkNotNull(seasonNumber, 'seasonNumber');
     _addParam(params, 'language', value: language);
     _addParam(params, 'include_image_language', list: includeLanguage);
-    return _core.doQuery('tv/$showId/season/$seasonNumber/images',
+    return _core._query('tv/$showId/season/$seasonNumber/images',
         params: params);
   }
 
@@ -118,7 +118,7 @@ class TvSeasons {
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/$showId/season/$seasonNumber/videos',
+    return _core._query('tv/$showId/season/$seasonNumber/videos',
         params: params);
   }
 }

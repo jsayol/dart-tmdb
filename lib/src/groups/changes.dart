@@ -17,7 +17,7 @@ class Changes {
   ///     // Usage
   ///     Map result = await tmdb.changes.getMovies();
   Future<Map> getMovies() {
-    return _core.doQuery('movie/changes');
+    return _core._query('movie/changes');
   }
 
     /// Get a list of people ids that have been edited.
@@ -28,7 +28,7 @@ class Changes {
     ///     // Usage
     ///     Map result = await tmdb.changes.getPeople();
     Future<Map> getPeople() {
-      return _core.doQuery('person/changes');
+      return _core._query('person/changes');
     }
 
   /// Get a list of TV show ids that have been edited.
@@ -39,6 +39,6 @@ class Changes {
   ///     // Usage
   ///     Map result = await tmdb.changes.getTv();
   Future<Map> getTv() {
-    return _core.doQuery('tv/changes');
+    return _core._query('tv/changes');
   }
 }

@@ -9,6 +9,8 @@ library tmdb.core;
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:http/http.dart' as http;
+
 part 'src/request.dart';
 part 'src/groups.dart';
 part 'src/groups/account.dart';
@@ -66,42 +68,61 @@ abstract class TMDBApiCore {
   TvEpisodes _tvEpisodes;
   TvSeasons _tvSeasons;
 
-  // Abstract method to be mplemented either for dart:html or dart:io.
-  Future<String> makeRequest(Request);
-
   // Generic method to query the remote API, given an endpoint and an
   // optional set of parameters.
-  Future<Map> doQuery(String endpoint,
-      {String method: 'get', Map<String, String> params}) async {
-    Request req = new Request(method: method);
+  Future<Map> _query(String endpoint,
+      {String method: 'GET', Map<String, String> params}) async {
     List<String> query = [];
-
-    req.uri = new Uri(
-        scheme: _apiUriScheme,
-        host: _apiUriHost,
-        path: '/$_apiUriVersion/$endpoint');
-
-    if (params != null) {
-      params['api_key'] = _apiKey;
-    } else {
-      params = {'api_key': _apiKey};
-    }
+    params ??= new Map<String, String>();
+    params['api_key'] = _apiKey;
 
     params.forEach((String k, dynamic v) {
       query.add('$k=' + Uri.encodeQueryComponent(v.toString()));
     });
 
-    if (method == 'get') {
-      req.uri = req.uri.replace(query: query.join('&'));
-    } else if (method == 'post') {
-      req.data = query.join('&');
+    Uri url = new Uri(
+        scheme: _apiUriScheme,
+        host: _apiUriHost,
+        path: '/$_apiUriVersion/$endpoint');
+
+    if (['GET', 'HEAD', 'DELETE'].contains(method)) {
+      url = url.replace(query: query.join('&'));
+    }
+
+    http.Request request = new http.Request(method, url);
+
+    if (['POST', 'PUT'].contains(method)) {
+      request.body = query.join('&');
     }
 
     try {
-      String response = await makeRequest(req);
+      String response = await handleRequest(request);
       return JSON.decode(response);
     } catch (e) {
       // TODO: Handle exceptions
+    }
+  }
+
+  // Abstract method to be implemented either for dart:html or dart:io.
+  Future<String> handleRequest(Request);
+
+  Future<String> handleResponse(http.Response response) async {
+    if (response.statusCode == 429) {
+      // The request rate limit has been exceeded. Let's retry after the
+      // number of seconds that we get from the respinse headers, plus an
+      // extra 500 ms for safety.
+      // print(response.headers);
+      int retryAfter = response.headers.containsKey('retry-after')
+          ? int.parse(response.headers['retry-after'])
+          : 10;
+      print("Retry-After: $retryAfter");
+      Duration delay = new Duration(milliseconds: 500 + 1000 * retryAfter);
+      http.Request oldReq = response.request as http.Request;
+      http.Request request = new http.Request(oldReq.method, oldReq.url);
+      request.body = oldReq.body;
+      return await new Future.delayed(delay, () => handleRequest(request));
+    } else {
+      return response.body;
     }
   }
 
@@ -161,6 +182,7 @@ abstract class TMDBApiCore {
 
   /// Alias for [tvEpisodes]
   TvEpisodes get tvepisodes => _tvEpisodes;
+
   /// Alias for [tvSeasons]
   TvSeasons get tvseasons => _tvSeasons;
 }

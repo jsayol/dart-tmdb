@@ -16,7 +16,7 @@ class Certifications {
   ///     // Usage
   ///     Map result = await tmdb.certifications.getMovieList();
   Future<Map> getMovieList() {
-    return _core.doQuery('certification/movie/list');
+    return _core._query('certification/movie/list');
   }
 
   /// Get the list of supported certifications for tv shows.
@@ -24,6 +24,6 @@ class Certifications {
   ///     // Usage
   ///     Map result = await tmdb.certifications.getTvList();
   Future<Map> getTvList() {
-    return _core.doQuery('certification/tv/list');
+    return _core._query('certification/tv/list');
   }
 }

@@ -27,7 +27,7 @@ class TvEpisodes {
     _checkNotNull(episodeNumber, 'episodeNumber');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery(
+    return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber',
         params: params);
   }
@@ -49,7 +49,7 @@ class TvEpisodes {
     _checkNotNull(id, 'id');
     _addParam(params, 'start_date', value: startDate);
     _addParam(params, 'end_date', value: endDate);
-    return _core.doQuery('tv/episode/$id/changes', params: params);
+    return _core._query('tv/episode/$id/changes', params: params);
   }
 
   /// This method lets users get the status of whether or not the TV episode has been rated.
@@ -70,7 +70,7 @@ class TvEpisodes {
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
-    return _core.doQuery(
+    return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber/credits');
   }
 
@@ -88,7 +88,7 @@ class TvEpisodes {
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
     _addParam(params, 'language', value: language);
-    return _core.doQuery(
+    return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber/external_ids',
         params: params);
   }
@@ -103,7 +103,7 @@ class TvEpisodes {
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
-    return _core.doQuery(
+    return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber/images');
   }
 
@@ -139,7 +139,7 @@ class TvEpisodes {
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
     _addParam(params, 'language', value: language);
-    return _core.doQuery(
+    return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber/videos',
         params: params);
   }

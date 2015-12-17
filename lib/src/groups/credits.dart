@@ -26,6 +26,6 @@ class Credits {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
-    return _core.doQuery('credit/$id', params: params);
+    return _core._query('credit/$id', params: params);
   }
 }

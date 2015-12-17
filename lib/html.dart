@@ -6,38 +6,18 @@
 /// Add documentation here?
 library tmdb.html;
 
-import 'dart:html';
 import 'dart:async';
 
+import 'package:http/browser_client.dart';
+import 'package:http/http.dart' as http;
 import 'package:tmdb/core.dart';
 
 class TMDBApi extends TMDBApiCore {
   TMDBApi(String apiKey, {bool https: false}) : super(apiKey, https: https);
 
-  @override Future<String> makeRequest(Request req) async {
-    HttpRequest httpreq;
-    try {
-      httpreq = await HttpRequest.request(req.uri.toString(),
-          method: req.method, sendData: req.data, responseType: 'text');
-      return httpreq.responseText;
-    } catch (e) {
-      if (e.target.status == 429) {
-        // The request rate limit has been exceeded. Let's retry after the
-        // number of seconds that we get from the response headers, plus an
-        // extra 500 ms for safety.
-        int retryAfter;
-        try {
-          retryAfter = int.parse(e.target.responseHeaders['Retry-After']);
-        } catch (e) {
-          // If the header is missing, we assume 10 seconds
-          retryAfter = 10;
-        }
-        print("Retry-After: $retryAfter");
-        Duration delay = new Duration(milliseconds: 500 + 1000 * retryAfter);
-        return await new Future.delayed(delay, () => makeRequest(req));
-      } else {
-        throw e;
-      }
-    }
+  @override Future<String> handleRequest(http.Request request) async {
+    http.Response response =
+        await http.Response.fromStream(await new BrowserClient().send(request));
+    return await handleResponse(response);
   }
 }

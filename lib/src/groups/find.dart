@@ -29,6 +29,6 @@ class Find {
     _checkNotNull(id, 'id');
     _checkNotNull(source, 'source');
     _addParam(params, 'external_source', value: source);
-    return _core.doQuery('find/$id', params: params);
+    return _core._query('find/$id', params: params);
   }
 }

@@ -20,7 +20,7 @@ class People {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('person/$id', params: params);
+    return _core._query('person/$id', params: params);
   }
 
   /// Get the movie credits for a specific person id.
@@ -39,7 +39,7 @@ class People {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('person/$id/movie_credits', params: params);
+    return _core._query('person/$id/movie_credits', params: params);
   }
 
   /// Get the TV credits for a specific person id.
@@ -59,7 +59,7 @@ class People {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('person/$id/tv_credits', params: params);
+    return _core._query('person/$id/tv_credits', params: params);
   }
 
   /// Get the combined (movie and TV) credits for a specific person id.
@@ -80,7 +80,7 @@ class People {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('person/$id/combined_credits', params: params);
+    return _core._query('person/$id/combined_credits', params: params);
   }
 
   /// Get the external ids for a specific person id.
@@ -89,7 +89,7 @@ class People {
   ///     Map result = await tmdb.people.getExternalIds('521');
   Future<Map> getExternalIds(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('person/$id/external_ids');
+    return _core._query('person/$id/external_ids');
   }
 
   /// Get the images for a specific person id.
@@ -98,7 +98,7 @@ class People {
   ///     Map result = await tmdb.people.getImages('521');
   Future<Map> getImages(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('person/$id/images');
+    return _core._query('person/$id/images');
   }
 
   /// Get the images that have been tagged with a specific person id.
@@ -118,7 +118,7 @@ class People {
     _checkNotNull(id, 'id');
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('person/$id/tagged_images', params: params);
+    return _core._query('person/$id/tagged_images', params: params);
   }
 
   /// Get the changes for a specific person id.
@@ -135,7 +135,7 @@ class People {
     _checkNotNull(id, 'id');
     _addParam(params, 'start_date', value: startDate);
     _addParam(params, 'end_date', value: endDate);
-    return _core.doQuery('person/$id/changes', params: params);
+    return _core._query('person/$id/changes', params: params);
   }
 
   /// Get the list of popular people on The Movie Database.
@@ -147,7 +147,7 @@ class People {
   Future<Map> getPopular({int page}) {
     Map params = {};
     _addParam(params, 'page', value: page);
-    return _core.doQuery('person/popular', params: params);
+    return _core._query('person/popular', params: params);
   }
 
   /// Get the latest person id.
@@ -155,6 +155,6 @@ class People {
   ///     // Usage
   ///     Map result = await tmdb.people.getLatest();
   Future<Map> getLatest() {
-    return _core.doQuery('person/latest');
+    return _core._query('person/latest');
   }
 }

@@ -24,7 +24,7 @@ class Movies {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id', params: params);
+    return _core._query('movie/$id', params: params);
   }
 
   /// This method lets a TMDb user account get the status of whether or not the movie has been rated or added to their favourite or movie watch list. A valid session id is required.
@@ -50,7 +50,7 @@ class Movies {
     _checkNotNull(id, 'id');
     _addParam(params, 'country', value: country);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/alternative_titles', params: params);
+    return _core._query('movie/$id/alternative_titles', params: params);
   }
 
   /// Get the cast and crew information for a specific movie id.
@@ -64,7 +64,7 @@ class Movies {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/credits', params: params);
+    return _core._query('movie/$id/credits', params: params);
   }
 
   /// Get the images (posters and backdrops) for a specific movie id.
@@ -87,7 +87,7 @@ class Movies {
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
     _addParam(params, 'include_image_language', list: includeLanguage);
-    return _core.doQuery('movie/$id/images', params: params);
+    return _core._query('movie/$id/images', params: params);
   }
 
   /// Get movie keywords based on its ID.
@@ -101,7 +101,7 @@ class Movies {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/keywords', params: params);
+    return _core._query('movie/$id/keywords', params: params);
   }
 
   /// Get the release date and certification information by country for a specific movie id.
@@ -115,7 +115,7 @@ class Movies {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/releases', params: params);
+    return _core._query('movie/$id/releases', params: params);
   }
 
   /// Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
@@ -133,7 +133,7 @@ class Movies {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/videos', params: params);
+    return _core._query('movie/$id/videos', params: params);
   }
 
   /// Get the translations for a specific movie id.
@@ -147,7 +147,7 @@ class Movies {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/translations', params: params);
+    return _core._query('movie/$id/translations', params: params);
   }
 
   /// Get the similar movies for a specific movie id.
@@ -170,7 +170,7 @@ class Movies {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/similar', params: params);
+    return _core._query('movie/$id/similar', params: params);
   }
 
   /// Get the reviews for a particular movie id.
@@ -193,7 +193,7 @@ class Movies {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/reviews', params: params);
+    return _core._query('movie/$id/reviews', params: params);
   }
 
   /// Get the lists that the movie belongs to.
@@ -216,7 +216,7 @@ class Movies {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('movie/$id/lists', params: params);
+    return _core._query('movie/$id/lists', params: params);
   }
 
   /// Get the changes for a specific movie id.
@@ -236,7 +236,7 @@ class Movies {
     _checkNotNull(id, 'id');
     _addParam(params, 'start_date', value: startDate);
     _addParam(params, 'end_date', value: endDate);
-    return _core.doQuery('movie/$id/changes', params: params);
+    return _core._query('movie/$id/changes', params: params);
   }
 
   /// This method lets users create (or delete) a rating on a movie.
@@ -253,7 +253,7 @@ class Movies {
   ///     // Basic usage
   ///     Map result = await tmdb.movies.getLatest('105');
   Future<Map> getLatest() {
-    return _core.doQuery('movie/latest');
+    return _core._query('movie/latest');
   }
 
   /// Get the list of movies playing that have been, or are being released this week. This list refreshes every day.
@@ -270,7 +270,7 @@ class Movies {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('movie/now_playing', params: params);
+    return _core._query('movie/now_playing', params: params);
   }
 
   /// Get the list of popular movies on The Movie Database. This list refreshes every day.
@@ -287,7 +287,7 @@ class Movies {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('movie/popular', params: params);
+    return _core._query('movie/popular', params: params);
   }
 
   /// Get the list of top rated movies. By default, this list will only include movies that have 50 or more votes. This list refreshes every day.
@@ -304,7 +304,7 @@ class Movies {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('movie/top_rated', params: params);
+    return _core._query('movie/top_rated', params: params);
   }
 
   /// Get the list of upcoming movies by release date. This list refreshes every day.
@@ -321,6 +321,6 @@ class Movies {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('movie/upcoming', params: params);
+    return _core._query('movie/upcoming', params: params);
   }
 }

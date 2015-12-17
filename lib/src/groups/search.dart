@@ -21,7 +21,7 @@ class Search {
     _checkNotNull(query, 'query');
     _addParam(params, 'query', value: query);
     _addParam(params, 'page', value: page);
-    return _core.doQuery('search/company', params: params);
+    return _core._query('search/company', params: params);
   }
 
   /// Search for collections by name.
@@ -40,7 +40,7 @@ class Search {
     _addParam(params, 'query', value: query);
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('search/collection', params: params);
+    return _core._query('search/collection', params: params);
   }
 
   /// Search for keywords by name.
@@ -55,7 +55,7 @@ class Search {
     _checkNotNull(query, 'query');
     _addParam(params, 'query', value: query);
     _addParam(params, 'page', value: page);
-    return _core.doQuery('search/keyword', params: params);
+    return _core._query('search/keyword', params: params);
   }
 
   /// Search for lists by name and description.
@@ -74,7 +74,7 @@ class Search {
     _addParam(params, 'query', value: query);
     _addParam(params, 'page', value: page);
     _addParam(params, 'include_adult', value: includeAdult);
-    return _core.doQuery('search/list', params: params);
+    return _core._query('search/list', params: params);
   }
 
   /// Search for movies by title.
@@ -104,7 +104,7 @@ class Search {
     _addParam(params, 'include_adult', value: includeAdult);
     _addParam(params, 'year', value: year);
     _addParam(params, 'primary_release_year', value: primaryReleaseYear);
-    return _core.doQuery('search/movie', params: params);
+    return _core._query('search/movie', params: params);
   }
 
   /// Search the movie, tv show and person collections with a single query.
@@ -131,7 +131,7 @@ class Search {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'include_adult', value: includeAdult);
-    return _core.doQuery('search/multi', params: params);
+    return _core._query('search/multi', params: params);
   }
 
   /// Search for people by name.
@@ -152,7 +152,7 @@ class Search {
     _addParam(params, 'page', value: page);
     _addParam(params, 'include_adult', value: includeAdult);
     _addParam(params, 'search_type', value: searchType);
-    return _core.doQuery('search/list', params: params);
+    return _core._query('search/list', params: params);
   }
 
   /// Alias for [Search.person].
@@ -184,6 +184,6 @@ class Search {
     _addParam(params, 'language', value: language);
     _addParam(params, 'first_air_date_year', value: firstAirDateYear);
     _addParam(params, 'search_type', value: searchType);
-    return _core.doQuery('search/tv', params: params);
+    return _core._query('search/tv', params: params);
   }
 }

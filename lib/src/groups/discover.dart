@@ -64,7 +64,7 @@ class Discover {
     _addParam(params, 'with_keywords', value: withKeywords);
     _addParam(params, 'with_people', value: withPeople);
     _addParam(params, 'year', value: year);
-    return _core.doQuery('dicover/movie', params: params);
+    return _core._query('dicover/movie', params: params);
   }
 
   /// Discover TV shows by different types of data like average rating, number of votes, genres, the network they aired on and air dates.
@@ -99,6 +99,6 @@ class Discover {
     _addParam(params, 'with_Genres', value: withGenres);
     _addParam(params, 'with_networks', value: withNetworks);
 
-    return _core.doQuery('discover/tv', params: params);
+    return _core._query('discover/tv', params: params);
   }
 }

@@ -17,6 +17,6 @@ class Networks {
   ///     Map result = await tmdb.networks.getInfo('5558aea6c3a3687774008f11');
   Future<Map> getInfo(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('network/$id');
+    return _core._query('network/$id');
   }
 }

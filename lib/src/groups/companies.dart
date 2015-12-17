@@ -20,7 +20,7 @@ class Companies {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('company/$id', params: params);
+    return _core._query('company/$id', params: params);
   }
 
   /// Get the list of movies associated with a particular company.
@@ -40,6 +40,6 @@ class Companies {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('company/$id/movies', params: params);
+    return _core._query('company/$id/movies', params: params);
   }
 }

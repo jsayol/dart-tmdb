@@ -15,7 +15,7 @@ class Lists {
   ///     Map result = await tmdb.lists.getInfo('5558aea6c3a3687774008f11');
   Future<Map> getInfo(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('list/$id');
+    return _core._query('list/$id');
   }
 
   /// Delete a list by id.
@@ -34,7 +34,7 @@ class Lists {
     _checkNotNull(listId, 'listId');
     _checkNotNull(movieId, 'movieId');
     _addParam(params, 'movie_id', value: movieId);
-    return _core.doQuery('list/$listId/item_status');
+    return _core._query('list/$listId/item_status');
   }
 
   /// This method lets users create a new list. A valid session id is required.

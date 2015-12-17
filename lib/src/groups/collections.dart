@@ -27,7 +27,7 @@ class Collections {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('collection/$id', params: params);
+    return _core._query('collection/$id', params: params);
   }
 
   /// Get all of the images for a particular collection by collection id.
@@ -51,6 +51,6 @@ class Collections {
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
     _addParam(params, 'include_image_language', list: includeLanguage);
-    return _core.doQuery('collection/$id/images', params: params);
+    return _core._query('collection/$id/images', params: params);
   }
 }

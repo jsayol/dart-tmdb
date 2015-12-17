@@ -29,7 +29,7 @@ class Tv {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('tv/$id', params: params);
+    return _core._query('tv/$id', params: params);
   }
 
   /// This method lets users get the status of whether or not the TV show has been rated or added to their favourite or watch lists.
@@ -47,7 +47,7 @@ class Tv {
   ///     Map result = await tmdb.tv.getAlternativeTitles('4745');
   Future<Map> getAlternativeTitles(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('tv/$id/alternative_titles');
+    return _core._query('tv/$id/alternative_titles');
   }
 
   /// Get the changes for a specific TV show id.
@@ -68,7 +68,7 @@ class Tv {
     _checkNotNull(id, 'id');
     _addParam(params, 'start_date', value: startDate);
     _addParam(params, 'end_date', value: endDate);
-    return _core.doQuery('tv/$id/changes', params: params);
+    return _core._query('tv/$id/changes', params: params);
   }
 
   /// Get the content ratings for a specific TV show id.
@@ -77,7 +77,7 @@ class Tv {
   ///     Map result = await tmdb.tv.getContentRatings('4745');
   Future<Map> getContentRatings(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('tv/$id/content_ratings');
+    return _core._query('tv/$id/content_ratings');
   }
 
   /// Get the cast and crew information for a specific movie id.
@@ -91,7 +91,7 @@ class Tv {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('tv/$id/credits', params: params);
+    return _core._query('tv/$id/credits', params: params);
   }
 
   /// Get the external ids that we have stored for a TV series.
@@ -105,7 +105,7 @@ class Tv {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/$id/external_ids', params: params);
+    return _core._query('tv/$id/external_ids', params: params);
   }
 
   /// Get the images (posters and backdrops) for a TV series.
@@ -124,7 +124,7 @@ class Tv {
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
     _addParam(params, 'include_image_language', list: includeLanguage);
-    return _core.doQuery('tv/$id/images', params: params);
+    return _core._query('tv/$id/images', params: params);
   }
 
   /// Get the plot keywords for a specific TV show id.
@@ -138,7 +138,7 @@ class Tv {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('tv/$id/keywords', params: params);
+    return _core._query('tv/$id/keywords', params: params);
   }
 
   /// This method lets users create a rating on a TV series.
@@ -179,7 +179,7 @@ class Tv {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'append_to_response', list: append);
-    return _core.doQuery('tv/$id/similar', params: params);
+    return _core._query('tv/$id/similar', params: params);
   }
 
   /// Get the list of translations that exist for a TV series.
@@ -190,7 +190,7 @@ class Tv {
   ///     Map result = await tmdb.tv.getTranslations('4745');
   Future<Map> getTranslations(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('tv/$id/translations');
+    return _core._query('tv/$id/translations');
   }
 
   /// Get the videos that have been added to a TV series (trailers, opening credits, etc...)
@@ -204,7 +204,7 @@ class Tv {
     Map params = {};
     _checkNotNull(id, 'id');
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/$id/videos', params: params);
+    return _core._query('tv/$id/videos', params: params);
   }
 
   /// Get the latest TV show id.
@@ -212,7 +212,7 @@ class Tv {
   ///     // Basic usage
   ///     Map result = await tmdb.tv.getLatest('105');
   Future<Map> getLatest() {
-    return _core.doQuery('tv/latest');
+    return _core._query('tv/latest');
   }
 
   /// Get the list of TV shows that are currently on the air.
@@ -231,7 +231,7 @@ class Tv {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/on_the_air', params: params);
+    return _core._query('tv/on_the_air', params: params);
   }
 
   /// Get the list of TV shows that are currently on the air.
@@ -251,7 +251,7 @@ class Tv {
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
     _addParam(params, 'timezone', value: timezone);
-    return _core.doQuery('tv/on_the_air', params: params);
+    return _core._query('tv/on_the_air', params: params);
   }
 
   /// Get the list of top rated TV shows.
@@ -270,7 +270,7 @@ class Tv {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/top_rated', params: params);
+    return _core._query('tv/top_rated', params: params);
   }
 
   /// Get the list of popular TV shows.
@@ -289,6 +289,6 @@ class Tv {
     Map params = {};
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('tv/popular', params: params);
+    return _core._query('tv/popular', params: params);
   }
 }

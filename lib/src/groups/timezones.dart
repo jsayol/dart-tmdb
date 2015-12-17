@@ -14,6 +14,6 @@ class Timezones {
   ///     // Usage
   ///     Map result = await tmdb.timezones.list();
   Future<Map> list() {
-    return _core.doQuery('timezones/list');
+    return _core._query('timezones/list');
   }
 }

@@ -15,7 +15,7 @@ class Keywords {
   ///     Map result = await tmdb.keywords.getInfo('105');
   Future<Map> getInfo(String id) {
     _checkNotNull(id, 'id');
-    return _core.doQuery('keyword/$id');
+    return _core._query('keyword/$id');
   }
 
   /// Get the list of movies for a particular keyword by id.
@@ -33,6 +33,6 @@ class Keywords {
     _checkNotNull(id, 'id');
     _addParam(params, 'page', value: page);
     _addParam(params, 'language', value: language);
-    return _core.doQuery('keyword/$id/movies', params: params);
+    return _core._query('keyword/$id/movies', params: params);
   }
 }

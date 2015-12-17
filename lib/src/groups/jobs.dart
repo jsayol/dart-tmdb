@@ -14,6 +14,6 @@ class Jobs {
   ///     // Basic usage
   ///     Map result = await tmdb.jobs.getList();
   Future<Map> getList() {
-    return _core.doQuery('job/list');
+    return _core._query('job/list');
   }
 }

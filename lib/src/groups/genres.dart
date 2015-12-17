@@ -16,7 +16,7 @@ class Genres {
   Future<Map> forMovies({String language}) {
     Map params = {};
     _addParam(params, 'language', value: language);
-    return _core.doQuery('genre/movie/list', params: params);
+    return _core._query('genre/movie/list', params: params);
   }
 
   /// Get the list of TV genres.
@@ -26,7 +26,7 @@ class Genres {
   Future<Map> forTv({String language}) {
     Map params = {};
     _addParam(params, 'language', value: language);
-    return _core.doQuery('genre/tv/list', params: params);
+    return _core._query('genre/tv/list', params: params);
   }
 
   /// Get the list of movies for a particular genre by id.
@@ -48,6 +48,6 @@ class Genres {
     _addParam(params, 'language', value: language);
     _addParam(params, 'include_all_movies', value: includeAll);
     _addParam(params, 'include_adult', value: includeAdult);
-    return _core.doQuery('genre/$id/movies', params: params);
+    return _core._query('genre/$id/movies', params: params);
   }
 }
