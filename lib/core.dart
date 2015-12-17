@@ -41,7 +41,7 @@ part 'src/groups/tvseasons.dart';
 abstract class TMDBApiCore {
   final String _apiUriHost = 'api.themoviedb.org';
   final String _apiUriVersion = '3';
-  final String _apiUriScheme;
+  final bool _apiUriHTTPS;
   final String _apiKey;
 
   Account _account;
@@ -71,7 +71,9 @@ abstract class TMDBApiCore {
   // Generic method to query the remote API, given an endpoint and an
   // optional set of parameters.
   Future<Map> _query(String endpoint,
-      {String method: 'GET', Map<String, String> params}) async {
+      {String method: 'GET',
+      Map<String, String> params,
+      bool https: false}) async {
     List<String> query = [];
     params ??= new Map<String, String>();
     params['api_key'] = _apiKey;
@@ -81,7 +83,7 @@ abstract class TMDBApiCore {
     });
 
     Uri url = new Uri(
-        scheme: _apiUriScheme,
+        scheme: _apiUriHTTPS || https ? 'https' : 'http',
         host: _apiUriHost,
         path: '/$_apiUriVersion/$endpoint');
 
@@ -129,8 +131,7 @@ abstract class TMDBApiCore {
   /// Generates a new [TMDBApi] instance with the provided API key.
   ///
   ///     TMDBApi tmdb = new TMDBApi('YOUR_API_KEY_HERE');
-  TMDBApiCore(this._apiKey, {bool https: false})
-      : _apiUriScheme = "http${https ? 's' : ''}" {
+  TMDBApiCore(this._apiKey, {bool https: false}) : _apiUriHTTPS = https {
     _account = new Account(this);
     _authentication = new Authentication(this);
     _certifications = new Certifications(this);
