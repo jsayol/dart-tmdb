@@ -17,9 +17,9 @@ class Companies {
   ///     // Get results plus company movies
   ///     Map result = await tmdb.companies.getInfo('56', append: ['movies']);
   Future<Map> getInfo(String id, {List<String> append}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
-    _addParam(params, 'append_to_response', list: append);
+    params.add('append_to_response', append);
     return _core._query('company/$id', params: params);
   }
 
@@ -35,11 +35,11 @@ class Companies {
   ///     Map result = await tmdb.companies.getMovies('56', page: 2);
   Future<Map> getMovies(String id,
       {int page, String language, List<String> append}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'append_to_response', list: append);
+    params.add('page', page);
+    params.add('language', language);
+    params.add('append_to_response', append);
     return _core._query('company/$id/movies', params: params);
   }
 }

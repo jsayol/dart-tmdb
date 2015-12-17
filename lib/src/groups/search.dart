@@ -17,10 +17,10 @@ class Search {
   ///     // Get second page of results
   ///     Map result = await tmdb.search.company('amblin', page: 2);
   Future<Map> company(String query, {int page}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
+    params.add('query', query);
+    params.add('page', page);
     return _core._query('search/company', params: params);
   }
 
@@ -35,11 +35,11 @@ class Search {
   ///     // Get second page of results
   ///     Map result = await tmdb.search.collection('future', page: 2);
   Future<Map> collection(String query, {int page, String language}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'language', value: language);
+    params.add('query', query);
+    params.add('page', page);
+    params.add('language', language);
     return _core._query('search/collection', params: params);
   }
 
@@ -51,10 +51,10 @@ class Search {
   ///     // Get second page of results
   ///     Map result = await tmdb.search.keyword('clock tower', page: 2);
   Future<Map> keyword(String query, {int page}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
+    params.add('query', query);
+    params.add('page', page);
     return _core._query('search/keyword', params: params);
   }
 
@@ -69,11 +69,11 @@ class Search {
   ///     // Get second page of results
   ///     Map result = await tmdb.search.list('Sci-Fi', page: 2);
   Future<Map> list(String query, {int page, bool includeAdult}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'include_adult', value: includeAdult);
+    params.add('query', query);
+    params.add('page', page);
+    params.add('include_adult', includeAdult);
     return _core._query('search/list', params: params);
   }
 
@@ -96,14 +96,14 @@ class Search {
       bool includeAdult,
       int year,
       int primaryReleaseYear}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'include_adult', value: includeAdult);
-    _addParam(params, 'year', value: year);
-    _addParam(params, 'primary_release_year', value: primaryReleaseYear);
+    params.add('query', query);
+    params.add('page', page);
+    params.add('language', language);
+    params.add('include_adult', includeAdult);
+    params.add('year', year);
+    params.add('primary_release_year', primaryReleaseYear);
     return _core._query('search/movie', params: params);
   }
 
@@ -125,12 +125,12 @@ class Search {
   ///     Map result = await tmdb.search.multi('Backside to the Future', includeAdult: true);
   Future<Map> multi(String query,
       {int page, String language, bool includeAdult}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'include_adult', value: includeAdult);
+    params.add('query', query);
+    params.add('page', page);
+    params.add('language', language);
+    params.add('include_adult', includeAdult);
     return _core._query('search/multi', params: params);
   }
 
@@ -146,12 +146,12 @@ class Search {
   ///     Map result = await tmdb.search.person('Christopher Lloyd', page: 2);
   Future<Map> person(String query,
       {int page, bool includeAdult, String searchType}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'include_adult', value: includeAdult);
-    _addParam(params, 'search_type', value: searchType);
+    params.add('query', query);
+    params.add('page', page);
+    params.add('include_adult', includeAdult);
+    params.add('search_type', searchType);
     return _core._query('search/list', params: params);
   }
 
@@ -177,13 +177,13 @@ class Search {
   ///     Map result = await tmdb.search.tv('Back to the Future', page: 2);
   Future<Map> tv(String query,
       {int page, String language, int firstAirDateYear, String searchType}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(query, 'query');
-    _addParam(params, 'query', value: query);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'first_air_date_year', value: firstAirDateYear);
-    _addParam(params, 'search_type', value: searchType);
+    params.add('query', query);
+    params.add('page', page);
+    params.add('language', language);
+    params.add('first_air_date_year', firstAirDateYear);
+    params.add('search_type', searchType);
     return _core._query('search/tv', params: params);
   }
 }

@@ -21,11 +21,11 @@ class TvSeasons {
   ///     Map result = await tmdb.tvSeasons.getInfo('4745', 1, append: ['images', 'videos']);
   Future<Map> getInfo(String showId, int seasonNumber,
       {String language, List<String> append}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'append_to_response', list: append);
+    params.add('language', language);
+    params.add('append_to_response', append);
     return _core._query('tv/$showId/season/$seasonNumber', params: params);
   }
 
@@ -42,10 +42,10 @@ class TvSeasons {
   ///     // Get results until October 21st, 2015
   ///     Map result = await tmdb.tvSeasons.getChanges('9569', endDate: '2015-10-21');
   Future<Map> getChanges(String id, {String startDate, String endDate}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
-    _addParam(params, 'start_date', value: startDate);
-    _addParam(params, 'end_date', value: endDate);
+    params.add('start_date', startDate);
+    params.add('end_date', endDate);
     return _core._query('tv/season/$id/changes', params: params);
   }
 
@@ -77,10 +77,10 @@ class TvSeasons {
   ///     Map result = await tmdb.tvSeasons.getExternalIds('4745', 2, language: 'es');
   Future<Map> getExternalIds(String showId, int seasonNumber,
       {String language}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
-    _addParam(params, 'language', value: language);
+    params.add('language', language);
     return _core._query('tv/$showId/season/$seasonNumber/external_ids',
         params: params);
   }
@@ -97,11 +97,11 @@ class TvSeasons {
   ///     Map result = await tmdb.tvSeasons.getImages('4745', 1, includeLanguage: ['ru', 'de']);
   Future<Map> getImages(String showId, int seasonNumber,
       {String language, List<String> includeLanguage}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'include_image_language', list: includeLanguage);
+    params.add('language', language);
+    params.add('include_image_language', includeLanguage);
     return _core._query('tv/$showId/season/$seasonNumber/images',
         params: params);
   }
@@ -114,10 +114,10 @@ class TvSeasons {
   ///     // Get results for the second season in Spanish
   ///     Map result = await tmdb.tvSeasons.getVideos('4745', 2, language: 'es');
   Future<Map> getVideos(String showId, int seasonNumber, {String language}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
-    _addParam(params, 'language', value: language);
+    params.add('language', language);
     return _core._query('tv/$showId/season/$seasonNumber/videos',
         params: params);
   }

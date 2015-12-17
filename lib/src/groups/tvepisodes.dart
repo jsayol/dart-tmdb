@@ -21,12 +21,12 @@ class TvEpisodes {
   ///     Map result = await tmdb.tvEpisodes.getInfo('4745', 1, 1, append: ['images', 'videos']);
   Future<Map> getInfo(String showId, int seasonNumber, int episodeNumber,
       {String language, List<String> append}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'append_to_response', list: append);
+    params.add('language', language);
+    params.add('append_to_response', append);
     return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber',
         params: params);
@@ -45,10 +45,10 @@ class TvEpisodes {
   ///     // Get results until October 21st, 2015
   ///     Map result = await tmdb.tvEpisodes.getChanges('9569', endDate: '2015-10-21');
   Future<Map> getChanges(String id, {String startDate, String endDate}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
-    _addParam(params, 'start_date', value: startDate);
-    _addParam(params, 'end_date', value: endDate);
+    params.add('start_date', startDate);
+    params.add('end_date', endDate);
     return _core._query('tv/episode/$id/changes', params: params);
   }
 
@@ -83,11 +83,11 @@ class TvEpisodes {
   ///     Map result = await tmdb.tvEpisodes.getExternalIds('4745', 2, 1, language: 'es');
   Future<Map> getExternalIds(String showId, int seasonNumber, int episodeNumber,
       {String language}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
-    _addParam(params, 'language', value: language);
+    params.add('language', language);
     return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber/external_ids',
         params: params);
@@ -134,11 +134,11 @@ class TvEpisodes {
   ///     Map result = await tmdb.tvEpisodes.getVideos('4745', 2, 1, language: 'es');
   Future<Map> getVideos(String showId, int seasonNumber, int episodeNumber,
       {String language}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(showId, 'showId');
     _checkNotNull(seasonNumber, 'seasonNumber');
     _checkNotNull(episodeNumber, 'episodeNumber');
-    _addParam(params, 'language', value: language);
+    params.add('language', language);
     return _core._query(
         'tv/$showId/season/$seasonNumber/episode/$episodeNumber/videos',
         params: params);

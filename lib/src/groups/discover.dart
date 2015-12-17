@@ -39,31 +39,31 @@ class Discover {
       String withKeywords,
       String withPeople,
       int year}) {
-    Map params = {};
-    _addParam(params, 'certification_country', value: certificationCountry);
-    _addParam(params, 'certification', value: certification);
-    _addParam(params, 'certification.lte', value: certificationLTE);
-    _addParam(params, 'include_Adult', value: includeAdult);
-    _addParam(params, 'include_video', value: includeVideo);
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'primary_release_year', value: primaryReleaseYear);
-    _addParam(params, 'primary_release_Date.gte', value: primaryReleaseDateGTE);
-    _addParam(params, 'primary_release_Date.lte', value: primaryReleaseDateLTE);
-    _addParam(params, 'release_date.gte', value: releaseDateGTE);
-    _addParam(params, 'release_date.lte', value: releaseDateLTE);
-    _addParam(params, 'sort_by', value: sortBy);
-    _addParam(params, 'vote_count.gte', value: voteCountGTE);
-    _addParam(params, 'vote_count.lte', value: voteCountLTE);
-    _addParam(params, 'vote_average.gte', value: voteAverageGTE);
-    _addParam(params, 'vote_average.lte', value: voteAverageLTE);
-    _addParam(params, 'with_cast', value: withCast);
-    _addParam(params, 'with_crew', value: withCrew);
-    _addParam(params, 'with_companies', value: withCompanies);
-    _addParam(params, 'with_genres', value: withGenres);
-    _addParam(params, 'with_keywords', value: withKeywords);
-    _addParam(params, 'with_people', value: withPeople);
-    _addParam(params, 'year', value: year);
+    Params params = new Params();
+    params.add('certification_country', certificationCountry);
+    params.add('certification', certification);
+    params.add('certification.lte', certificationLTE);
+    params.add('include_Adult', includeAdult);
+    params.add('include_video', includeVideo);
+    params.add('language', language);
+    params.add('page', page);
+    params.add('primary_release_year', primaryReleaseYear);
+    params.add('primary_release_Date.gte', primaryReleaseDateGTE);
+    params.add('primary_release_Date.lte', primaryReleaseDateLTE);
+    params.add('release_date.gte', releaseDateGTE);
+    params.add('release_date.lte', releaseDateLTE);
+    params.add('sort_by', sortBy);
+    params.add('vote_count.gte', voteCountGTE);
+    params.add('vote_count.lte', voteCountLTE);
+    params.add('vote_average.gte', voteAverageGTE);
+    params.add('vote_average.lte', voteAverageLTE);
+    params.add('with_cast', withCast);
+    params.add('with_crew', withCrew);
+    params.add('with_companies', withCompanies);
+    params.add('with_genres', withGenres);
+    params.add('with_keywords', withKeywords);
+    params.add('with_people', withPeople);
+    params.add('year', year);
     return _core._query('dicover/movie', params: params);
   }
 
@@ -84,20 +84,20 @@ class Discover {
       int voteCountGTE,
       String withGenres,
       String withNetworks}) {
-    Map params = {};
-    _addParam(params, 'air_date.gte', value: airDateGTE);
-    _addParam(params, 'air_date.lte', value: airDateLTE);
-    _addParam(params, 'first_air_date.gte', value: firstAirDateGTE);
-    _addParam(params, 'first_air_date.lte', value: firstAirDateLTE);
-    _addParam(params, 'first_air_date_year', value: firstAirDateYear);
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'page', value: page);
-    _addParam(params, 'sort_by', value: sortBy);
-    _addParam(params, 'timezone', value: timezone);
-    _addParam(params, 'vote_average.gte', value: voteAverageGTE);
-    _addParam(params, 'vote_count.gte', value: voteCountGTE);
-    _addParam(params, 'with_Genres', value: withGenres);
-    _addParam(params, 'with_networks', value: withNetworks);
+    Params params = new Params();
+    params.add('air_date.gte', airDateGTE);
+    params.add('air_date.lte', airDateLTE);
+    params.add('first_air_date.gte', firstAirDateGTE);
+    params.add('first_air_date.lte', firstAirDateLTE);
+    params.add('first_air_date_year', firstAirDateYear);
+    params.add('language', language);
+    params.add('page', page);
+    params.add('sort_by', sortBy);
+    params.add('timezone', timezone);
+    params.add('vote_average.gte', voteAverageGTE);
+    params.add('vote_count.gte', voteCountGTE);
+    params.add('with_Genres', withGenres);
+    params.add('with_networks', withNetworks);
 
     return _core._query('discover/tv', params: params);
   }

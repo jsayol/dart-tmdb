@@ -11,7 +11,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-part 'src/request.dart';
+part 'src/params.dart';
 part 'src/groups.dart';
 part 'src/groups/account.dart';
 part 'src/groups/authentication.dart';
@@ -72,15 +72,10 @@ abstract class TMDBApiCore {
   // optional set of parameters.
   Future<Map> _query(String endpoint,
       {String method: 'GET',
-      Map<String, String> params,
+      Params params,
       bool https: false}) async {
-    List<String> query = [];
-    params ??= new Map<String, String>();
-    params['api_key'] = _apiKey;
-
-    params.forEach((String k, dynamic v) {
-      query.add('$k=' + Uri.encodeQueryComponent(v.toString()));
-    });
+    params ??= new Params();
+    params.add('api_key', _apiKey);
 
     Uri url = new Uri(
         scheme: _apiUriHTTPS || https ? 'https' : 'http',
@@ -88,13 +83,13 @@ abstract class TMDBApiCore {
         path: '/$_apiUriVersion/$endpoint');
 
     if (['GET', 'HEAD', 'DELETE'].contains(method)) {
-      url = url.replace(query: query.join('&'));
+      url = url.replace(query: params.toString());
     }
 
     http.Request request = new http.Request(method, url);
 
     if (['POST', 'PUT'].contains(method)) {
-      request.body = query.join('&');
+      request.body = params.toString();
     }
 
     try {
@@ -104,6 +99,42 @@ abstract class TMDBApiCore {
       // TODO: Handle exceptions
     }
   }
+
+  // Future<Map> _query(String endpoint,
+  //     {String method: 'GET',
+  //     Map<String, String> params,
+  //     Params params2,
+  //     bool https: false}) async {
+  //   List<String> query = [];
+  //   params ??= new Map<String, String>();
+  //   params['api_key'] = _apiKey;
+  //
+  //   params.forEach((String k, dynamic v) {
+  //     query.add('$k=' + Uri.encodeQueryComponent(v.toString()));
+  //   });
+  //
+  //   Uri url = new Uri(
+  //       scheme: _apiUriHTTPS || https ? 'https' : 'http',
+  //       host: _apiUriHost,
+  //       path: '/$_apiUriVersion/$endpoint');
+  //
+  //   if (['GET', 'HEAD', 'DELETE'].contains(method)) {
+  //     url = url.replace(query: query.join('&'));
+  //   }
+  //
+  //   http.Request request = new http.Request(method, url);
+  //
+  //   if (['POST', 'PUT'].contains(method)) {
+  //     request.body = query.join('&');
+  //   }
+  //
+  //   try {
+  //     String response = await handleRequest(request);
+  //     return JSON.decode(response);
+  //   } catch (e) {
+  //     // TODO: Handle exceptions
+  //   }
+  // }
 
   // Abstract method to be implemented either for dart:html or dart:io.
   Future<String> handleRequest(Request);

@@ -16,8 +16,8 @@ class Authentication {
   /// The guest session ID obtained by the [newGuestSession] method.
   String get guestSessionId => _guestSessionId;
 
-  String set sessionId(String id) => _sessionId = id;
-  String set guestSessionId(String id) => _guestSessionId = id;
+  void set sessionId(String id) { _sessionId = id; }
+  void set guestSessionId(String id) { _guestSessionId = id; }
 
   Authentication(this._core);
 
@@ -31,8 +31,7 @@ class Authentication {
   Future<String> newToken() async {
     Map resp = await _core._query('authentication/token/new', https: true);
     if ((resp != null) && resp['success']) {
-      _token = resp['request_token'];
-      return _token;
+      return resp['request_token'];
     } else {
       String msg = "Couldn't obtain new token" +
           (resp?.containsKey('status_message')
@@ -51,13 +50,13 @@ class Authentication {
   ///         .validateWithLogin('TOKEN_HERE', 'USERNAME_HERE', 'PASSWORD_HERE');
   Future<String> validateWithLogin(
       String token, String username, String password) async {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(token, 'token');
     _checkNotNull(username, 'username');
     _checkNotNull(password, 'password');
-    _addParam(params, 'token', value: token);
-    _addParam(params, 'username', value: username);
-    _addParam(params, 'password', value: password);
+    params.add('token', token);
+    params.add('username', username);
+    params.add('password', password);
     Map resp = await _core._query('authentication/token/validate_with_login',
         https: true);
     if ((resp != null) && resp['success']) {
@@ -78,9 +77,9 @@ class Authentication {
   ///     // Usage
   ///     String sessionId = await tmdb.authentication.newSession('TOKEN_HERE');
   Future<String> newSession(String token) async {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(token, 'token');
-    _addParam(params, 'token', value: token);
+    params.add('token', token);
     Map resp = await _core._query('authentication/session/new', https: true);
     if ((resp != null) && resp['success']) {
       return resp['session_id'];
@@ -126,7 +125,7 @@ class Authentication {
   ///     Map userInfo = await tmdb.account.getInfo();
   Future<bool> login(String username, String password) async {
     String token = await newToken();
-    _sessionId = newSession(await validateWithLogin(token, username, password));
+    _sessionId = await newSession(await validateWithLogin(token, username, password));
     return true;
   }
 

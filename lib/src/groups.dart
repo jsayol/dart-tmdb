@@ -3,16 +3,6 @@
 
 part of tmdb.core;
 
-void _addParam(Map params, String name, {dynamic value, List list}) {
-  if (value != null) {
-    params[name] = value.toString();
-  } else if (list != null) {
-    if (list.length > 0) {
-      params[name] = list.join(',');
-    }
-  }
-}
-
 void _checkNotNull(value, String name) {
   if (value == null) {
     throw new ArgumentError.notNull(name);

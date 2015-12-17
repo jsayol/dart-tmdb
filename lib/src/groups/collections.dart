@@ -23,10 +23,10 @@ class Collections {
   ///     // Get results plus trailers and reviews
   ///     Map result = await tmdb.collections.getInfo('264', append: ['trailers', 'reviews']);
   Future<Map> getInfo(String id, {String language, List<String> append}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'append_to_response', list: append);
+    params.add('language', language);
+    params.add('append_to_response', append);
     return _core._query('collection/$id', params: params);
   }
 
@@ -46,11 +46,11 @@ class Collections {
   ///     Map result = await tmdb.collections.getInfo('264', append: ['trailers', 'reviews']);
   Future<Map> getImages(String id,
       {String language, List<String> append, List<String> includeLanguage}) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
-    _addParam(params, 'language', value: language);
-    _addParam(params, 'append_to_response', list: append);
-    _addParam(params, 'include_image_language', list: includeLanguage);
+    params.add('language', language);
+    params.add('append_to_response', append);
+    params.add('include_image_language', includeLanguage);
     return _core._query('collection/$id/images', params: params);
   }
 }

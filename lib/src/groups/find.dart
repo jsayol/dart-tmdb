@@ -25,10 +25,10 @@ class Find {
   ///     // Find a person via a Freebase MID
   ///     Map person = await tmdb.find.byId('m/0hz_1', 'freebase_mid');
   Future<Map> byId(String id, String source) {
-    Map params = {};
+    Params params = new Params();
     _checkNotNull(id, 'id');
     _checkNotNull(source, 'source');
-    _addParam(params, 'external_source', value: source);
+    params.add('external_source', source);
     return _core._query('find/$id', params: params);
   }
 }
