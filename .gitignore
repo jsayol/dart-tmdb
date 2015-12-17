@@ -22,6 +22,4 @@ doc/api/
 *.iws
 
 # Other files
-lib/src/_template_.dart
-lib/src/c.sh
 test
