@@ -29,10 +29,10 @@ class Companies {
   ///     Map result = await tmdb.companies.getMovies('56');
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.companies.getMovies('56', language: 'es');
+  ///     Map result = await tmdb.companies.getMovies('56', language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.companies.getMovies('56', page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.companies.getMovies('56', page: 2);
   Future<Map> getMovies(String id,
       {int page, String language, List<String> append}) {
     Map params = {};

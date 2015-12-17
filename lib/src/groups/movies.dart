@@ -76,7 +76,6 @@ class Movies {
   ///     Map result = await tmdb.movies.getImages('105', language: 'es');
   ///
   ///     // Get results in the default language plus in Russian and German.
-  ///     // Maximum 5 extra languages per request
   ///     Map result = await tmdb.movies.getImages('105', includeLanguage: ['ru', 'de']);
   ///
   ///     // Get results plus trailers and reviews
@@ -125,10 +124,10 @@ class Movies {
   ///     Map result = await tmdb.movies.getVideos('105');
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getVideos('105', language: 'es');
+  ///     Map result = await tmdb.movies.getVideos('105', language: 'es');
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map infoWithAppend = await tmdb.movies.getVideos('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.movies.getVideos('105', append: ['trailers', 'reviews']);
   Future<Map> getVideos(String id, {String language, List<String> append}) {
     Map params = {};
     _checkNotNull(id, 'id');
@@ -143,7 +142,7 @@ class Movies {
   ///     Map result = await tmdb.movies.getTranslations('105');
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map infoWithAppend = await tmdb.movies.getTranslations('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.movies.getTranslations('105', append: ['trailers', 'reviews']);
   Future<Map> getTranslations(String id, {List<String> append}) {
     Map params = {};
     _checkNotNull(id, 'id');
@@ -157,13 +156,13 @@ class Movies {
   ///     Map result = await tmdb.movies.getSimilar('105');
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getSimilar('105', language: 'es');
+  ///     Map result = await tmdb.movies.getSimilar('105', language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getSimilar('105', page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getSimilar('105', page: 2);
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map infoWithAppend = await tmdb.movies.getSimilar('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.movies.getSimilar('105', append: ['trailers', 'reviews']);
   Future<Map> getSimilar(String id,
       {int page, String language, List<String> append}) {
     Map params = {};
@@ -180,13 +179,13 @@ class Movies {
   ///     Map result = await tmdb.movies.getReviews('105');
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getReviews('105', language: 'es');
+  ///     Map result = await tmdb.movies.getReviews('105', language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getReviews('105', page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getReviews('105', page: 2);
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map infoWithAppend = await tmdb.movies.getReviews('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.movies.getReviews('105', append: ['trailers', 'reviews']);
   Future<Map> getReviews(String id,
       {int page, String language, List<String> append}) {
     Map params = {};
@@ -203,13 +202,13 @@ class Movies {
   ///     Map result = await tmdb.movies.getLists('105');
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getLists('105', language: 'es');
+  ///     Map result = await tmdb.movies.getLists('105', language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getLists('105', page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getLists('105', page: 2);
   ///
   ///     // Get results plus trailers and reviews
-  ///     Map infoWithAppend = await tmdb.movies.getLists('105', append: ['trailers', 'reviews']);
+  ///     Map result = await tmdb.movies.getLists('105', append: ['trailers', 'reviews']);
   Future<Map> getLists(String id,
       {int page, String language, List<String> append}) {
     Map params = {};
@@ -228,10 +227,10 @@ class Movies {
   ///     Map result = await tmdb.movies.getChanges('105');
   ///
   ///     // Get results starting from October 21st, 2015
-  ///     Map infoSpanish = await tmdb.movies.getChanges('105', startDate: '2015-10-21');
+  ///     Map result = await tmdb.movies.getChanges('105', startDate: '2015-10-21');
   ///
   ///     // Get results until October 21st, 2015
-  ///     Map infoSpanish = await tmdb.movies.getChanges('105', endDate: '2015-10-21');
+  ///     Map result = await tmdb.movies.getChanges('105', endDate: '2015-10-21');
   Future<Map> getChanges(String id, {String startDate, String endDate}) {
     Map params = {};
     _checkNotNull(id, 'id');
@@ -240,7 +239,9 @@ class Movies {
     return _core.doQuery('movie/$id/changes', params: params);
   }
 
-  /// TThis method lets users create (or delete) a rating on a movie. A valid session id or guest session id is required.
+  /// This method lets users create (or delete) a rating on a movie.
+  ///
+  /// A valid session id or guest session id is required.
   ///
   /// TODO
   Future<Map> setRating(String id) {
@@ -261,10 +262,10 @@ class Movies {
   ///     Map result = await tmdb.movies.getNowPlaying();
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getNowPlaying(language: 'es');
+  ///     Map result = await tmdb.movies.getNowPlaying(language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getNowPlaying(page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getNowPlaying(page: 2);
   Future<Map> getNowPlaying({int page, String language}) {
     Map params = {};
     _addParam(params, 'page', value: page);
@@ -278,10 +279,10 @@ class Movies {
   ///     Map result = await tmdb.movies.getPopular();
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getPopular(language: 'es');
+  ///     Map result = await tmdb.movies.getPopular(language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getPopular(page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getPopular(page: 2);
   Future<Map> getPopular({int page, String language}) {
     Map params = {};
     _addParam(params, 'page', value: page);
@@ -295,10 +296,10 @@ class Movies {
   ///     Map result = await tmdb.movies.getTopRated();
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getTopRated(language: 'es');
+  ///     Map result = await tmdb.movies.getTopRated(language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getTopRated(page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getTopRated(page: 2);
   Future<Map> getTopRated({int page, String language}) {
     Map params = {};
     _addParam(params, 'page', value: page);
@@ -312,10 +313,10 @@ class Movies {
   ///     Map result = await tmdb.movies.getUpcoming();
   ///
   ///     // Get results in Spanish
-  ///     Map infoSpanish = await tmdb.movies.getUpcoming(language: 'es');
+  ///     Map result = await tmdb.movies.getUpcoming(language: 'es');
   ///
-  ///     // Get page 2 (minimum 1, maximum 1000)
-  ///     Map infoSpanish = await tmdb.movies.getUpcoming(page: 2);
+  ///     // Get second page of results
+  ///     Map result = await tmdb.movies.getUpcoming(page: 2);
   Future<Map> getUpcoming({int page, String language}) {
     Map params = {};
     _addParam(params, 'page', value: page);

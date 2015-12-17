@@ -9,10 +9,11 @@ class Timezones {
 
   Timezones(this._core);
 
-  /// Retrieves xxxx
+  /// Get the list of supported timezones for the API methods that support them.
   ///
-  ///     Map result = tmdbApi.timezones.get();
-  get() {
-    return _core;
+  ///     // Usage
+  ///     Map result = await tmdb.timezones.list();
+  Future<Map> list() {
+    return _core.doQuery('timezones/list');
   }
 }

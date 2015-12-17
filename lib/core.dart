@@ -63,8 +63,8 @@ abstract class TMDBApiCore {
   Search _search;
   Timezones _timezones;
   Tv _tv;
-  Tvepisodes _tvepisodes;
-  Tvseasons _tvseasons;
+  TvEpisodes _tvEpisodes;
+  TvSeasons _tvSeasons;
 
   // Abstract method to be mplemented either for dart:html or dart:io.
   Future<String> makeRequest(Request);
@@ -87,8 +87,8 @@ abstract class TMDBApiCore {
       params = {'api_key': _apiKey};
     }
 
-    params.forEach((String k, String v) {
-      query.add('$k=' + Uri.encodeQueryComponent(v));
+    params.forEach((String k, dynamic v) {
+      query.add('$k=' + Uri.encodeQueryComponent(v.toString()));
     });
 
     if (method == 'get') {
@@ -131,8 +131,8 @@ abstract class TMDBApiCore {
     _search = new Search(this);
     _timezones = new Timezones(this);
     _tv = new Tv(this);
-    _tvepisodes = new Tvepisodes(this);
-    _tvseasons = new Tvseasons(this);
+    _tvEpisodes = new TvEpisodes(this);
+    _tvSeasons = new TvSeasons(this);
   }
 
   Account get account => _account;
@@ -156,6 +156,11 @@ abstract class TMDBApiCore {
   Search get search => _search;
   Timezones get timezones => _timezones;
   Tv get tv => _tv;
-  Tvepisodes get tvepisodes => _tvepisodes;
-  Tvseasons get tvseasons => _tvseasons;
+  TvEpisodes get tvEpisodes => _tvEpisodes;
+  TvSeasons get tvSeasons => _tvSeasons;
+
+  /// Alias for [tvEpisodes]
+  TvEpisodes get tvepisodes => _tvEpisodes;
+  /// Alias for [tvSeasons]
+  TvSeasons get tvseasons => _tvSeasons;
 }

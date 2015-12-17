@@ -9,10 +9,12 @@ class Reviews {
 
   Reviews(this._core);
 
-  /// Retrieves xxxx
+  /// Get the full details of a review by ID.
   ///
-  ///     Map result = tmdbApi.reviews.get();
-  get() {
-    return _core;
+  ///     // Usage
+  ///     Map result = await tmdb.reviews.getInfo('521');
+  Future<Map> getInfo(String id) {
+    _checkNotNull(id, 'id');
+    return _core.doQuery('review/$id');
   }
 }
