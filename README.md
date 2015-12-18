@@ -33,7 +33,7 @@ With the library imported you can just create a new instance (providing your API
 For example, a simple console application to get the top rated movies would look like this:
 ```dart
 // Import the proper library
-import 'package:tmdb/html.dart';
+import 'package:tmdb/io.dart';
 
 main() async {
   // Create a new TMDBApi instance
@@ -67,7 +67,7 @@ var info = await tmdb.account.getInfo();
 
 ```
 
-If you still don't have a session ID for the user you want to authenticate you can easily obtain one using the `login` method.
+If you don't have a session ID for the user you want to authenticate you can easily obtain one using the `login` method.
 ```dart
 // Create instance
 TMDBApi tmdb = new TMDBApi('YOUR_API_KEY_HERE');
@@ -75,7 +75,7 @@ TMDBApi tmdb = new TMDBApi('YOUR_API_KEY_HERE');
 // Log in with a username and password
 await tmdb.authentication.login('USERNAME_HERE', 'PASSWORD_HERE');
 
-// The session ID is already stored in tmdb.authentication.sessionId
+// The session ID is now stored in tmdb.authentication.sessionId
 // so you can start using any API method.
 // SAVE THE SESSION ID FOR FUTURE USE.
 
@@ -84,13 +84,13 @@ var info = await tmdb.account.getInfo();
 
 ```
 
-**IMPORTANT: You should only use the `login` method once for each user because the API will generate a new session ID every time you do so. Once you have obtained it you should save it somewhere safe and feed it to the library whenever you need to (which is usually right after calling `new new TMDBApi`).**
+**IMPORTANT: You should only use the `login` method once for each user because the API will generate a new session ID every time you do so. Once you have obtained it you should save it somewhere safe and feed it to the library whenever you need to (which is usually right after calling `new TMDBApi()`).**
 
 ## Futures vs async/await
 
 The easiest way to call the API methods is using the [async/await ][async] syntax provided by Dart, like on the examples above.
 
-To use it you just need to add the `async` modifier to the function that will be calling the asynchronous methods from this library, and then prefix the actual call with `await`.
+To use it you just need to add the `async` modifier to the function that will be calling the asynchronous methods from this library. Then, prefix the actual call with `await`.
 ```dart
 printMovieInfo(id) async {
   var info = await tmdb.movies.getInfo(id);

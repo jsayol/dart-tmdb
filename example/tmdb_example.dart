@@ -4,7 +4,7 @@
 library tmdb.example;
 
 // Import the proper library
-import 'package:tmdb/html.dart';
+import 'package:tmdb/io.dart';
 
 main() async {
   // Create a new TMDBApi instance
