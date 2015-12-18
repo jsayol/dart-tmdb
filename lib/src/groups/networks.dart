@@ -14,7 +14,7 @@ class Networks {
   /// You can use this ID to search for TV shows with the discover. At this time we don't have much but this will be fleshed out over time.
   ///
   ///     // Usage
-  ///     Map result = await tmdb.networks.getInfo('5558aea6c3a3687774008f11');
+  ///     Map result = await tmdb.networks.getInfo('16');
   Future<Map> getInfo(String id) {
     _checkNotNull(id, 'id');
     return _core._query('network/$id');

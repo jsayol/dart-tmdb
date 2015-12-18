@@ -6,19 +6,18 @@ part of tmdb.core;
 /// Handles the parameters that will be passed to the query.
 class _Params extends Object with MapMixin {
   Map<String, dynamic> _obj = new Map<String, dynamic>();
+  bool needsSession = false;
+  bool needsGuestSession = false;
+  bool needsEitherSession = false;
 
-  /// Create an object with no parameters.
   _Params();
+  _Params.withSession() : needsSession = true;
+  _Params.withGuestSession() : needsGuestSession = true;
+  _Params.withEitherSession() : needsEitherSession = true;
 
-  /// Create an object and add the session ID as a parameter.
-  _Params.withSessionId(TMDBApiCore core, {bool error: true}) {
-    _obj['session_id'] = core.authentication.sessionId;
+  List<String> get keys => _obj.keys;
 
-    if ((_obj['session_id'] == null) && error) {
-      throw new StateError(
-          "Can't use this method without having a session ID.");
-    }
-  }
+  bool get hasElements => _obj.length > 0;
 
   operator [](String name) => _obj[name];
 
@@ -36,8 +35,6 @@ class _Params extends Object with MapMixin {
       }
     }
   }
-
-  List<String> get keys => _obj.keys;
 
   dynamic remove(Object name) {
     String v = _obj[name];

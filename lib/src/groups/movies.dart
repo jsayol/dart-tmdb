@@ -27,11 +27,16 @@ class Movies {
     return _core._query('movie/$id', params: params);
   }
 
-  /// This method lets a TMDb user account get the status of whether or not the movie has been rated or added to their favourite or movie watch list. A valid session id is required.
+  /// This method lets a TMDb user account get the status of whether or not the movie has been rated or added to their favourite or movie watch list.
   ///
-  /// TODO
+  /// A valid session id is required.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.movies.getAccountStates('105');
   Future<Map> getAccountStates(String id) {
-    return null;
+    _Params params = new _Params.withSession();
+    _checkNotNull(id, 'id');
+    return _core._query('movie/$id/account_states', params: params);
   }
 
   /// Get the alternative titles for a specific movie id.
@@ -239,13 +244,30 @@ class Movies {
     return _core._query('movie/$id/changes', params: params);
   }
 
-  /// This method lets users create (or delete) a rating on a movie.
+  /// This method lets users create a rating on a movie.
   ///
   /// A valid session id or guest session id is required.
   ///
-  /// TODO
-  Future<Map> setRating(String id) {
-    return null;
+  ///     // Usage
+  ///     Map result = await tmdb.movies.setRating('105', 10);
+  Future<Map> setRating(String id, num value) {
+    _Params params = new _Params.withEitherSession();
+    _checkNotNull(id, 'id');
+    _checkNotNull(value, 'value');
+    params['value'] = value;
+    return _core._query('movie/$id/rating', params: params, method: 'POST');
+  }
+
+  /// This method lets users remove a rating on a movie.
+  ///
+  /// A valid session id or guest session id is required.
+  ///
+  ///     // Usage
+  ///     Map result = await tmdb.movies.removeRating('105');
+  Future<Map> removeRating(String id) {
+    _Params params = new _Params.withEitherSession();
+    _checkNotNull(id, 'id');
+    return _core._query('movie/$id/rating', params: params, method: 'DELETE');
   }
 
   /// Get the latest movie id.

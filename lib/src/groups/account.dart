@@ -16,7 +16,7 @@ class Account {
   ///     // Usage
   ///     Map result = await tmdb.account.getInfo();
   Future<Map> getInfo() {
-    _Params params = new _Params.withSessionId(_core);
+    _Params params = new _Params.withSession();
     return _core._query('account', params: params);
   }
 
@@ -31,7 +31,7 @@ class Account {
   ///     // Get second page of results
   ///     Map result = await tmdb.account.getLists(page: 2);
   Future<Map> getLists({int page, String language}) {
-    _Params params = new _Params.withSessionId(_core);
+    _Params params = new _Params.withSession();
     params['page'] = page;
     params['language'] = language;
     return _core._query('account/0/lists', params: params);
@@ -39,7 +39,7 @@ class Account {
 
   // Internal method to get various movies/tv lists (rated, watchlist)
   Future<Map> _getList(String type, int page, String language, String sortBy) {
-    _Params params = new _Params.withSessionId(_core);
+    _Params params = new _Params.withSession();
     params['page'] = page;
     params['language'] = language;
     params['sort_by'] = sortBy;
@@ -146,7 +146,7 @@ class Account {
 
   // Internal method to set/remove a favorite or watchlist
   Future<Map> _setList(String id, String type, String option, bool add) {
-    _Params params = new _Params.withSessionId(_core);
+    _Params params = new _Params.withSession();
     params['media_id'] = id;
     params['media_type'] = type;
     params[option] = add;

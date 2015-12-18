@@ -74,17 +74,41 @@ abstract class TMDBApiCore {
   Future<Map> _query(String endpoint,
       {String method: 'GET', _Params params, bool https: false}) async {
     String query = 'api_key=$_apiKey';
-    // params ??= new _Params();
 
-    if (params?.containsKey('session_id')) {
-      query += "&session_id=${params['session_id']}";
-      params.remove('session_id');
-    } else if (params?.containsKey('guest_session_id')) {
-      query += "&guest_session_id=${params['guest_session_id']}";
-      params.remove('guest_session_id');
+    if (params?.needsSession) {
+      if (authentication.sessionId == null) {
+        throw new StateError(
+            "Can't use this method without having a session ID.");
+      } else {
+        query += "&session_id=${authentication.sessionId}";
+      }
+    } else if (params?.needsGuestSession) {
+      if (authentication.guestSessionId == null) {
+        throw new StateError(
+            "Can't use this method without having a guest session ID.");
+      } else {
+        query += "&guest_session_id=${authentication.guestSessionId}";
+      }
+    } else if (params?.needsEitherSession) {
+      if (authentication.sessionId != null) {
+        query += "&session_id=${authentication.sessionId}";
+      } else if (authentication.guestSessionId != null) {
+        query += "&guest_session_id=${authentication.guestSessionId}";
+      } else {
+        throw new StateError(
+            "Can't use this method without having a session or guest session ID.");
+      }
     }
 
-    if ((params?.length != 0) && ['GET', 'HEAD', 'DELETE'].contains(method)) {
+    // if (params?.containsKey('session_id')) {
+    //   query += "&session_id=${params['session_id']}";
+    //   params.remove('session_id');
+    // } else if (params?.containsKey('guest_session_id')) {
+    //   query += "&guest_session_id=${params['guest_session_id']}";
+    //   params.remove('guest_session_id');
+    // }
+
+    if (params?.hasElements && ['GET', 'HEAD', 'DELETE'].contains(method)) {
       query += '&${params.toString()}';
     }
 
@@ -98,7 +122,7 @@ abstract class TMDBApiCore {
     request.headers['Accept'] = 'application/json';
     request.headers['Content-Type'] = 'application/json';
 
-    if (['POST', 'PUT'].contains(method)) {
+    if (params?.hasElements && ['POST', 'PUT', 'DELETE'].contains(method)) {
       request.body = params?.toJSON();
     }
 

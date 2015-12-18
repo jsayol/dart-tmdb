@@ -56,10 +56,17 @@ class TvEpisodes {
   ///
   /// A valid session id is required.
   ///
-  /// TODO
+  ///     // Usage
+  ///     Map result = await tmdb.tvEpisodes.getAccountStates('4745', 1, 5);
   Future<Map> getAccountStates(
       String showId, int seasonNumber, int episodeNumber) {
-    return null;
+    _Params params = new _Params.withSession();
+    _checkNotNull(showId, 'showId');
+    _checkNotNull(seasonNumber, 'seasonNumber');
+    _checkNotNull(episodeNumber, 'episodeNumber');
+    return _core._query(
+        'tv/$showId/season/$seasonNumber/episode/$episodeNumber/account_states',
+        params: params);
   }
 
   /// Get the TV episode credits by combination of season and episode number.
@@ -111,18 +118,37 @@ class TvEpisodes {
   ///
   /// A valid session id is required.
   ///
-  /// TODO
-  Future<Map> setRating(String showId, int seasonNumber, int episodeNumber) {
-    return null;
+  ///     // Usage
+  ///     Map result = await tmdb.tvEpisodes.setRating('4745', 1, 5, 7.5);
+  Future<Map> setRating(
+      String showId, int seasonNumber, int episodeNumber, num value) {
+    _Params params = new _Params.withEitherSession();
+    _checkNotNull(showId, 'showId');
+    _checkNotNull(seasonNumber, 'seasonNumber');
+    _checkNotNull(episodeNumber, 'episodeNumber');
+    _checkNotNull(value, 'value');
+    params['value'] = value;
+    return _core._query(
+        'tv/$showId/season/$seasonNumber/episode/$episodeNumber/rating',
+        params: params,
+        method: 'POST');
   }
 
-  /// This method lets users delete a rating on a TV episode.
+  /// This method lets users remove a rating on a TV episode.
   ///
   /// A valid session id is required.
   ///
-  /// TODO
-  Future<Map> deleteRating(String showId, int seasonNumber, int episodeNumber) {
-    return null;
+  ///     // Usage
+  ///     Map result = await tmdb.tvEpisodes.removeRating('4745', 1, 5);
+  Future<Map> removeRating(String showId, int seasonNumber, int episodeNumber) {
+    _Params params = new _Params.withEitherSession();
+    _checkNotNull(showId, 'showId');
+    _checkNotNull(seasonNumber, 'seasonNumber');
+    _checkNotNull(episodeNumber, 'episodeNumber');
+    return _core._query(
+        'tv/$showId/season/$seasonNumber/episode/$episodeNumber/rating',
+        params: params,
+        method: 'DELETE');
   }
 
   /// Get the external ids that we have stored for a TV season by season number.

@@ -36,9 +36,12 @@ class Tv {
   ///
   /// A valid session id is required.
   ///
-  /// TODO
+  ///     // Usage
+  ///     Map result = await tmdb.tv.getAccountStates('4745');
   Future<Map> getAccountStates(String id) {
-    return null;
+    _Params params = new _Params.withSession();
+    _checkNotNull(id, 'id');
+    return _core._query('tv/$id/account_states', params: params);
   }
 
   /// Get the alternative titles for a specific show ID.
@@ -145,18 +148,26 @@ class Tv {
   ///
   /// A valid session id or guest session id is required.
   ///
-  /// TODO
-  Future<Map> setRating(String id) {
-    return null;
+  ///     // Usage
+  ///     Map result = await tmdb.tv.setRating('4745', 10);
+  Future<Map> setRating(String id, num value) {
+    _Params params = new _Params.withEitherSession();
+    _checkNotNull(id, 'id');
+    _checkNotNull(value, 'value');
+    params['value'] = value;
+    return _core._query('tv/$id/rating', params: params, method: 'POST');
   }
 
-  /// This method lets users delete a rating on a TV series.
+  /// This method lets users remove a rating on a TV series.
   ///
   /// A valid session id or guest session id is required.
   ///
-  /// TODO
-  Future<Map> deleteRating(String id) {
-    return null;
+  ///     // Usage
+  ///     Map result = await tmdb.tv.removeRating('4745');
+  Future<Map> removeRating(String id) {
+    _Params params = new _Params.withEitherSession();
+    _checkNotNull(id, 'id');
+    return _core._query('tv/$id/rating', params: params, method: 'DELETE');
   }
 
   /// Get the similar TV shows for a specific tv id.

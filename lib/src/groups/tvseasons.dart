@@ -53,9 +53,14 @@ class TvSeasons {
   ///
   /// A valid session id is required.
   ///
-  /// TODO
+  ///     // Usage
+  ///     Map result = await tmdb.tvSeasons.getAccountStates('4745', 1);
   Future<Map> getAccountStates(String showId, int seasonNumber) {
-    return null;
+    _Params params = new _Params.withSession();
+    _checkNotNull(showId, 'showId');
+    _checkNotNull(seasonNumber, 'seasonNumber');
+    return _core._query('tv/$showId/season/$seasonNumber/account_states',
+        params: params);
   }
 
   /// Get the cast & crew credits for a TV season by season number.

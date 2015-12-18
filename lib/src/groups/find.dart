@@ -22,7 +22,7 @@ class Find {
   ///     // Find a movie via an IMDb ID
   ///     Map movie = await tmdb.find.byId('tt0088763', 'imdb_id');
   ///
-  ///     // Find a person via a Freebase MID
+  ///     // Find a person via a TvRage ID
   ///     Map person = await tmdb.find.byId('24888', 'tvrage_id');
   Future<Map> byId(String id, String source) {
     _Params params = new _Params();
