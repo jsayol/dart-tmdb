@@ -4,16 +4,14 @@ A [TheMoviedb.org][apidocs] (TMDB) library for Dart.
 
 ## Features
 
-* Access to all API methods
-* Support for both console (`dart:io`) and web (`dart:html`) applications
-* User authentication, either:
-  * with a username and password (obtains new session ID)
-  * with a previously obtained session ID
-* You need to provide your own API key
+- Access to all API methods
+- Support for both console (`dart:io`) and web (`dart:html`) applications
+- User authentication, either with a username and password (obtains new session ID) or with a previously obtained session ID
+- You need to provide your own API key
 
 ## Documentation
 
-See the [full documentation](https://www.dartdocs.org/documentation/tmdb/latest) on *DartDocs*.
+See the [full documentation](https://www.dartdocs.org/documentation/tmdb/latest).
 
 ## Usage
 
