@@ -3,9 +3,21 @@
 
 library tmdb.example;
 
-// import 'package:tmdb/tmdb.dart';
+// Import the proper library
+import 'package:tmdb/html.dart';
 
-main() {
-  // var awesome = new TMDBApi('KEY');
-  // print('awesome: ${awesome.isAwesome}');
+main() async {
+  // Create a new TMDBApi instance
+  TMDBApi tmdb = new TMDBApi('YOUR_API_KEY_HERE');
+
+  // Get the top rated movies
+  Map topRated = await tmdb.movies.getTopRated();
+
+  // Loop through the results and print the title, year, and rating
+  topRated['results'].forEach((v) {
+    var title = v['title'];
+    var year = DateTime.parse(v['release_date']).year;
+    var rating = v['vote_average'].toStringAsFixed(1);
+    print("$title ($year) * $rating/10");
+  });
 }
