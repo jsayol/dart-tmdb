@@ -1,6 +1,6 @@
 name: tmdb
 description: A TheMoviedb.org (TMDB) library for Dart.
-version: 0.0.1-alpha1
+version: 0.0.1-alpha2
 author: Josep Sayol <josep.sayol@gmail.com>
 homepage: https://github.com/jsayol/dart-tmdb
 
