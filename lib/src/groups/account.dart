@@ -16,7 +16,7 @@ class Account {
   ///     // Usage
   ///     Map result = await tmdb.account.getInfo();
   Future<Map> getInfo() {
-    Params params = new Params.withSessionId(_core);
+    _Params params = new _Params.withSessionId(_core);
     return _core._query('account', params: params);
   }
 
@@ -31,10 +31,19 @@ class Account {
   ///     // Get second page of results
   ///     Map result = await tmdb.account.getLists(page: 2);
   Future<Map> getLists({int page, String language}) {
-    Params params = new Params.withSessionId(_core);
-    params.add('page', page);
-    params.add('language', language);
+    _Params params = new _Params.withSessionId(_core);
+    params['page'] = page;
+    params['language'] = language;
     return _core._query('account/0/lists', params: params);
+  }
+
+  // Internal method to get various movies/tv lists (rated, watchlist)
+  Future<Map> _getList(String type, int page, String language, String sortBy) {
+    _Params params = new _Params.withSessionId(_core);
+    params['page'] = page;
+    params['language'] = language;
+    params['sort_by'] = sortBy;
+    return _core._query('account/0/$type', params: params);
   }
 
   /// Get the list of favorite movies for the authenticated account.
@@ -48,11 +57,7 @@ class Account {
   ///     // Get second page of results, sorted by creation date
   ///     Map result = await tmdb.account.getFavoriteMovies(page: 2, sortBy: 'created_at.asc');
   Future<Map> getFavoriteMovies({int page, String language, String sortBy}) {
-    Params params = new Params.withSessionId(_core);
-    params.add('page', page);
-    params.add('language', language);
-    params.add('sort_by', sortBy);
-    return _core._query('account/0/favorite/movies', params: params);
+    return _getList('favorite/movies', page, language, sortBy);
   }
 
   /// Get the list of favorite TV series for the authenticated account.
@@ -66,19 +71,85 @@ class Account {
   ///     // Get second page of results, sorted by creation date
   ///     Map result = await tmdb.account.getFavoriteTv(page: 2, sortBy: 'created_at.asc');
   Future<Map> getFavoriteTv({int page, String language, String sortBy}) {
-    Params params = new Params.withSessionId(_core);
-    params.add('page', page);
-    params.add('language', language);
-    params.add('sort_by', sortBy);
-    return _core._query('account/0/favorite/tv', params: params);
+    return _getList('favorite/tv', page, language, sortBy);
+  }
+
+  /// Get the list of rated movies (and associated rating) for the authenticated account.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.account.getRatedMovies();
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.account.getRatedMovies(language: 'es');
+  ///
+  ///     // Get second page of results, sorted by creation date
+  ///     Map result = await tmdb.account.getRatedMovies(page: 2, sortBy: 'created_at.asc');
+  Future<Map> getRatedMovies({int page, String language, String sortBy}) {
+    return _getList('rated/movies', page, language, sortBy);
+  }
+
+  /// Get the list of rated TV shows (and associated rating) for the authenticated account.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.account.getRatedMovies();
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.account.getRatedMovies(language: 'es');
+  ///
+  ///     // Get second page of results, sorted by creation date
+  ///     Map result = await tmdb.account.getRatedMovies(page: 2, sortBy: 'created_at.asc');
+  Future<Map> getRatedTv({int page, String language, String sortBy}) {
+    return _getList('rated/tv', page, language, sortBy);
+  }
+
+  /// Get the list of rated TV episodes (and associated rating) for the authenticated account.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.account.getRatedMovies();
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.account.getRatedMovies(language: 'es');
+  ///
+  ///     // Get second page of results, sorted by creation date
+  ///     Map result = await tmdb.account.getRatedMovies(page: 2, sortBy: 'created_at.asc');
+  Future<Map> getRatedTvEpisodes({int page, String language, String sortBy}) {
+    return _getList('rated/tv/episodes', page, language, sortBy);
+  }
+
+  /// Get the list of movies on the authenticated account' watchlist.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.account.getWatchlistMovies();
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.account.getWatchlistMovies(language: 'es');
+  ///
+  ///     // Get second page of results, sorted by creation date
+  ///     Map result = await tmdb.account.getWatchlistMovies(page: 2, sortBy: 'created_at.asc');
+  Future<Map> getWatchlistMovies({int page, String language, String sortBy}) {
+    return _getList('watchlist/movies', page, language, sortBy);
+  }
+
+  /// Get the list of TV shows on the authenticated account' watchlist.
+  ///
+  ///     // Basic usage
+  ///     Map result = await tmdb.account.getWatchlistTv();
+  ///
+  ///     // Get results in Spanish
+  ///     Map result = await tmdb.account.getWatchlistTv(language: 'es');
+  ///
+  ///     // Get second page of results, sorted by creation date
+  ///     Map result = await tmdb.account.getWatchlistTv(page: 2, sortBy: 'created_at.asc');
+  Future<Map> getWatchlistTv({int page, String language, String sortBy}) {
+    return _getList('watchlist/tv', page, language, sortBy);
   }
 
   // Internal method to set/remove a favorite or watchlist
   Future<Map> _setList(String id, String type, String option, bool add) {
-    Params params = new Params.withSessionId(_core);
-    params.add('media_id', id);
-    params.add('media_type', type);
-    params.add(option, add);
+    _Params params = new _Params.withSessionId(_core);
+    params['media_id'] = id;
+    params['media_type'] = type;
+    params[option] = add;
     return _core._query('account/0/$option', method: 'POST', params: params);
   }
 
@@ -132,90 +203,5 @@ class Account {
   ///     Map result = await tmdb.account.setWatchlistTv('4745', watchlist: false);
   Future<Map> setWatchlistTv(String id, {bool watchlist: true}) {
     return _setList(id, 'tv', 'watchlist', watchlist);
-  }
-
-  // Internal method to get various movies/tv lists (rated, watchlist)
-  Future<Map> _getList(
-      String id, String type, int page, String language, String sortBy) {
-    Params params = new Params.withSessionId(_core);
-    params.add('page', page);
-    params.add('language', language);
-    params.add('sort_by', sortBy);
-    return _core._query('account/0/$type', params: params);
-  }
-
-  /// Get the list of rated movies (and associated rating) for the authenticated account.
-  ///
-  ///     // Basic usage
-  ///     Map result = await tmdb.account.getRatedMovies();
-  ///
-  ///     // Get results in Spanish
-  ///     Map result = await tmdb.account.getRatedMovies(language: 'es');
-  ///
-  ///     // Get second page of results, sorted by creation date
-  ///     Map result = await tmdb.account.getRatedMovies(page: 2, sortBy: 'created_at.asc');
-  Future<Map> getRatedMovies(String id,
-      {int page, String language, String sortBy}) {
-    return _getList(id, 'rated/movies', page, language, sortBy);
-  }
-
-  /// Get the list of rated TV shows (and associated rating) for the authenticated account.
-  ///
-  ///     // Basic usage
-  ///     Map result = await tmdb.account.getRatedMovies();
-  ///
-  ///     // Get results in Spanish
-  ///     Map result = await tmdb.account.getRatedMovies(language: 'es');
-  ///
-  ///     // Get second page of results, sorted by creation date
-  ///     Map result = await tmdb.account.getRatedMovies(page: 2, sortBy: 'created_at.asc');
-  Future<Map> getRatedTv(String id,
-      {int page, String language, String sortBy}) {
-    return _getList(id, 'rated/tv', page, language, sortBy);
-  }
-
-  /// Get the list of rated TV episodes (and associated rating) for the authenticated account.
-  ///
-  ///     // Basic usage
-  ///     Map result = await tmdb.account.getRatedMovies();
-  ///
-  ///     // Get results in Spanish
-  ///     Map result = await tmdb.account.getRatedMovies(language: 'es');
-  ///
-  ///     // Get second page of results, sorted by creation date
-  ///     Map result = await tmdb.account.getRatedMovies(page: 2, sortBy: 'created_at.asc');
-  Future<Map> getRatedTvEpisodes(String id,
-      {int page, String language, String sortBy}) {
-    return _getList(id, 'rated/tv/episodes', page, language, sortBy);
-  }
-
-  /// Get the list of movies on an accounts watchlist.
-  ///
-  ///     // Basic usage
-  ///     Map result = await tmdb.account.getWatchlistMovies();
-  ///
-  ///     // Get results in Spanish
-  ///     Map result = await tmdb.account.getWatchlistMovies(language: 'es');
-  ///
-  ///     // Get second page of results, sorted by creation date
-  ///     Map result = await tmdb.account.getWatchlistMovies(page: 2, sortBy: 'created_at.asc');
-  Future<Map> getWatchlistMovies(String id,
-      {int page, String language, String sortBy}) {
-    return _getList(id, 'watchlist/movies', page, language, sortBy);
-  }
-
-  /// Get the list of TV shows on an accounts watchlist.
-  ///
-  ///     // Basic usage
-  ///     Map result = await tmdb.account.getWatchlistTv();
-  ///
-  ///     // Get results in Spanish
-  ///     Map result = await tmdb.account.getWatchlistTv(language: 'es');
-  ///
-  ///     // Get second page of results, sorted by creation date
-  ///     Map result = await tmdb.account.getWatchlistTv(page: 2, sortBy: 'created_at.asc');
-  Future<Map> getWatchlistTv(String id,
-      {int page, String language, String sortBy}) {
-    return _getList(id, 'watchlist/tv', page, language, sortBy);
   }
 }

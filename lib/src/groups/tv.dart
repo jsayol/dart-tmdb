@@ -24,11 +24,11 @@ class Tv {
   ///     Map result = await tmdb.tv.getInfo('4745', append: ['credits', 'images']);
   Future<Map> getInfo(String id,
       {int page, String language, List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('page', page);
-    params.add('language', language);
-    params.add('append_to_response', append);
+    params['page'] = page;
+    params['language'] = language;
+    params['append_to_response'] = append;
     return _core._query('tv/$id', params: params);
   }
 
@@ -64,10 +64,10 @@ class Tv {
   ///     // Get results until October 21st, 2015
   ///     Map result = await tmdb.tv.getChanges('4745', endDate: '2015-10-21');
   Future<Map> getChanges(String id, {String startDate, String endDate}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('start_date', startDate);
-    params.add('end_date', endDate);
+    params['start_date'] = startDate;
+    params['end_date'] = endDate;
     return _core._query('tv/$id/changes', params: params);
   }
 
@@ -88,9 +88,9 @@ class Tv {
   ///     // Get results plus keywords and images
   ///     Map result = await tmdb.tv.getCredits('4745', append: ['keywords', 'images']);
   Future<Map> getCredits(String id, {List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('append_to_response', append);
+    params['append_to_response'] = append;
     return _core._query('tv/$id/credits', params: params);
   }
 
@@ -102,9 +102,9 @@ class Tv {
   ///     // Get results in Spanish
   ///     Map result = await tmdb.tv.getExternalIds('4745', language: 'es');
   Future<Map> getExternalIds(String id, {String language}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
+    params['language'] = language;
     return _core._query('tv/$id/external_ids', params: params);
   }
 
@@ -120,10 +120,10 @@ class Tv {
   ///     Map result = await tmdb.tv.getImages('4745', includeLanguage: ['ru', 'de']);
   Future<Map> getImages(String id,
       {String language, List<String> includeLanguage}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
-    params.add('include_image_language', includeLanguage);
+    params['language'] = language;
+    params['include_image_language'] = includeLanguage;
     return _core._query('tv/$id/images', params: params);
   }
 
@@ -135,9 +135,9 @@ class Tv {
   ///     // Get results plus credits and images
   ///     Map result = await tmdb.tv.getKeywords('4745', append: ['credits', 'images']);
   Future<Map> getKeywords(String id, {List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('append_to_response', append);
+    params['append_to_response'] = append;
     return _core._query('tv/$id/keywords', params: params);
   }
 
@@ -174,11 +174,11 @@ class Tv {
   ///     Map result = await tmdb.tv.getSimilar('4745', append: ['credits', 'images']);
   Future<Map> getSimilar(String id,
       {int page, String language, List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('page', page);
-    params.add('language', language);
-    params.add('append_to_response', append);
+    params['page'] = page;
+    params['language'] = language;
+    params['append_to_response'] = append;
     return _core._query('tv/$id/similar', params: params);
   }
 
@@ -201,9 +201,9 @@ class Tv {
   ///     // Get results in Spanish
   ///     Map result = await tmdb.tv.getVideos('4745', language: 'es');
   Future<Map> getVideos(String id, {String language}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
+    params['language'] = language;
     return _core._query('tv/$id/videos', params: params);
   }
 
@@ -228,9 +228,9 @@ class Tv {
   ///     // Get second page of results
   ///     Map result = await tmdb.tv.getOnTheAir(page: 2);
   Future<Map> getOnTheAir({int page, String language}) {
-    Params params = new Params();
-    params.add('page', page);
-    params.add('language', language);
+    _Params params = new _Params();
+    params['page'] = page;
+    params['language'] = language;
     return _core._query('tv/on_the_air', params: params);
   }
 
@@ -247,10 +247,10 @@ class Tv {
   ///     // Get second page of results
   ///     Map result = await tmdb.tv.getAiringToday(page: 2);
   Future<Map> getAiringToday({int page, String language, String timezone}) {
-    Params params = new Params();
-    params.add('page', page);
-    params.add('language', language);
-    params.add('timezone', timezone);
+    _Params params = new _Params();
+    params['page'] = page;
+    params['language'] = language;
+    params['timezone'] = timezone;
     return _core._query('tv/on_the_air', params: params);
   }
 
@@ -267,9 +267,9 @@ class Tv {
   ///     // Get second page of results
   ///     Map result = await tmdb.tv.getTopRated(page: 2);
   Future<Map> getTopRated({int page, String language}) {
-    Params params = new Params();
-    params.add('page', page);
-    params.add('language', language);
+    _Params params = new _Params();
+    params['page'] = page;
+    params['language'] = language;
     return _core._query('tv/top_rated', params: params);
   }
 
@@ -286,9 +286,9 @@ class Tv {
   ///     // Get second page of results
   ///     Map result = await tmdb.tv.getPopular(page: 2);
   Future<Map> getPopular({int page, String language}) {
-    Params params = new Params();
-    params.add('page', page);
-    params.add('language', language);
+    _Params params = new _Params();
+    params['page'] = page;
+    params['language'] = language;
     return _core._query('tv/popular', params: params);
   }
 }

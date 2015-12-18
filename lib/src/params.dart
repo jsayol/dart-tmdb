@@ -4,15 +4,14 @@
 part of tmdb.core;
 
 /// Handles the parameters that will be passed to the query.
-class Params {
-  // final TMDBApiCore _core;
-  Map _obj = new Map<String, String>();
+class _Params extends Object with MapMixin {
+  Map<String, dynamic> _obj = new Map<String, dynamic>();
 
   /// Create an object with no parameters.
-  Params();
+  _Params();
 
   /// Create an object and add the session ID as a parameter.
-  Params.withSessionId(TMDBApiCore core, {bool error: true}) {
+  _Params.withSessionId(TMDBApiCore core, {bool error: true}) {
     _obj['session_id'] = core.authentication.sessionId;
 
     if ((_obj['session_id'] == null) && error) {
@@ -21,9 +20,14 @@ class Params {
     }
   }
 
-  void add(String name, dynamic value) {
+  operator [](String name) => _obj[name];
+
+  operator []=(String name, dynamic value) {
     if (value != null) {
-      if (value is Iterable) {
+      if (value is bool) {
+        _obj[name] = value;
+      }
+      else if (value is Iterable) {
         if (value.length > 0) {
           _obj[name] = value.join(',');
         }
@@ -33,6 +37,18 @@ class Params {
     }
   }
 
+  List<String> get keys => _obj.keys;
+
+  dynamic remove(Object name) {
+    String v = _obj[name];
+    _obj.remove(name);
+    return v;
+  }
+
+  void clear() {
+    _obj.clear();
+  }
+
   String toString() {
     List query = new List();
     _obj.forEach((String k, dynamic v) {
@@ -40,4 +56,7 @@ class Params {
     });
     return query.join('&');
   }
+
+  String toJSON() => JSON.encode(_obj);
+
 }

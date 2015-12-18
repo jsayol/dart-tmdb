@@ -50,13 +50,13 @@ class Authentication {
   ///         .validateWithLogin('TOKEN_HERE', 'USERNAME_HERE', 'PASSWORD_HERE');
   Future<String> validateWithLogin(
       String token, String username, String password) async {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(token, 'token');
     _checkNotNull(username, 'username');
     _checkNotNull(password, 'password');
-    params.add('token', token);
-    params.add('username', username);
-    params.add('password', password);
+    params['token'] = token;
+    params['username'] = username;
+    params['password'] = password;
     Map resp = await _core._query('authentication/token/validate_with_login',
         https: true);
     if ((resp != null) && resp['success']) {
@@ -77,9 +77,9 @@ class Authentication {
   ///     // Usage
   ///     String sessionId = await tmdb.authentication.newSession('TOKEN_HERE');
   Future<String> newSession(String token) async {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(token, 'token');
-    params.add('token', token);
+    params['token'] = token;
     Map resp = await _core._query('authentication/session/new', https: true);
     if ((resp != null) && resp['success']) {
       return resp['session_id'];

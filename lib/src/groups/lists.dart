@@ -30,10 +30,10 @@ class Lists {
   ///     // Usage
   ///     Map result = await tmdb.lists.checkStatus('5558aea6c3a3687774008f11');
   Future<Map> checkStatus(String listId, String movieId) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(listId, 'listId');
     _checkNotNull(movieId, 'movieId');
-    params.add('movie_id', movieId);
+    params['movie_id'] = movieId;
     return _core._query('list/$listId/item_status');
   }
 

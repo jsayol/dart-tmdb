@@ -8,6 +8,7 @@ library tmdb.core;
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:collection';
 
 import 'package:http/http.dart' as http;
 
@@ -71,25 +72,34 @@ abstract class TMDBApiCore {
   // Generic method to query the remote API, given an endpoint and an
   // optional set of parameters.
   Future<Map> _query(String endpoint,
-      {String method: 'GET',
-      Params params,
-      bool https: false}) async {
-    params ??= new Params();
-    params.add('api_key', _apiKey);
+      {String method: 'GET', _Params params, bool https: false}) async {
+    String query = 'api_key=$_apiKey';
+    // params ??= new _Params();
+
+    if (params?.containsKey('session_id')) {
+      query += "&session_id=${params['session_id']}";
+      params.remove('session_id');
+    } else if (params?.containsKey('guest_session_id')) {
+      query += "&guest_session_id=${params['guest_session_id']}";
+      params.remove('guest_session_id');
+    }
+
+    if ((params?.length != 0) && ['GET', 'HEAD', 'DELETE'].contains(method)) {
+      query += '&${params.toString()}';
+    }
 
     Uri url = new Uri(
         scheme: _apiUriHTTPS || https ? 'https' : 'http',
         host: _apiUriHost,
-        path: '/$_apiUriVersion/$endpoint');
-
-    if (['GET', 'HEAD', 'DELETE'].contains(method)) {
-      url = url.replace(query: params.toString());
-    }
+        path: '/$_apiUriVersion/$endpoint',
+        query: query);
 
     http.Request request = new http.Request(method, url);
+    request.headers['Accept'] = 'application/json';
+    request.headers['Content-Type'] = 'application/json';
 
     if (['POST', 'PUT'].contains(method)) {
-      request.body = params.toString();
+      request.body = params?.toJSON();
     }
 
     try {
@@ -103,7 +113,7 @@ abstract class TMDBApiCore {
   // Future<Map> _query(String endpoint,
   //     {String method: 'GET',
   //     Map<String, String> params,
-  //     Params params2,
+  //     _Params params2,
   //     bool https: false}) async {
   //   List<String> query = [];
   //   params ??= new Map<String, String>();

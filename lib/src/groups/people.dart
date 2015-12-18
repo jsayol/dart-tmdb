@@ -17,9 +17,9 @@ class People {
   ///     // Get results plus images and TV credits
   ///     Map result = await tmdb.people.getInfo('521', append: ['images', 'tv_credits']);
   Future<Map> getCredits(String id, {List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('append_to_response', append);
+    params['append_to_response'] = append;
     return _core._query('person/$id', params: params);
   }
 
@@ -35,10 +35,10 @@ class People {
   ///     Map result = await tmdb.people.getMovieCredits('521', append: ['images', 'tv_credits']);
   Future<Map> getMovieCredits(String id,
       {String language, List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
-    params.add('append_to_response', append);
+    params['language'] = language;
+    params['append_to_response'] = append;
     return _core._query('person/$id/movie_credits', params: params);
   }
 
@@ -55,10 +55,10 @@ class People {
   ///     // Get results plus images and movie credits
   ///     Map result = await tmdb.people.getTvCredits('521', append: ['images', 'movie_credits']);
   Future<Map> getTvCredits(String id, {String language, List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
-    params.add('append_to_response', append);
+    params['language'] = language;
+    params['append_to_response'] = append;
     return _core._query('person/$id/tv_credits', params: params);
   }
 
@@ -76,10 +76,10 @@ class People {
   ///     Map result = await tmdb.people.getCombinedCredits('521', append: ['images']);
   Future<Map> getCombinedCredits(String id,
       {String language, List<String> append}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
-    params.add('append_to_response', append);
+    params['language'] = language;
+    params['append_to_response'] = append;
     return _core._query('person/$id/combined_credits', params: params);
   }
 
@@ -114,10 +114,10 @@ class People {
   ///     // Get second page of results
   ///     Map result = await tmdb.people.getTaggedImages('521', page: 2);
   Future<Map> getTaggedImages(String id, {int page, String language}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('page', page);
-    params.add('language', language);
+    params['page'] = page;
+    params['language'] = language;
     return _core._query('person/$id/tagged_images', params: params);
   }
 
@@ -131,10 +131,10 @@ class People {
   ///     // Get results starting from October 21st, 2015
   ///     Map result = await tmdb.people.getChanges('521', startDate: '2015-10-21');
   Future<Map> getChanges(String id, {String startDate, String endDate}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('start_date', startDate);
-    params.add('end_date', endDate);
+    params['start_date'] = startDate;
+    params['end_date'] = endDate;
     return _core._query('person/$id/changes', params: params);
   }
 
@@ -145,8 +145,8 @@ class People {
   ///     // Usage
   ///     Map result = await tmdb.people.getPopular();
   Future<Map> getPopular({int page}) {
-    Params params = new Params();
-    params.add('page', page);
+    _Params params = new _Params();
+    params['page'] = page;
     return _core._query('person/popular', params: params);
   }
 

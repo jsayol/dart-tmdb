@@ -23,9 +23,9 @@ class Credits {
   ///     // Get results plus trailers and reviews
   ///     Map result = await tmdb.credits.getInfo('105', append: ['trailers', 'reviews']);
   Future<Map> getInfo(String id, {String language}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('language', language);
+    params['language'] = language;
     return _core._query('credit/$id', params: params);
   }
 }

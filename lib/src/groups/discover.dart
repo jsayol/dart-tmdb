@@ -39,31 +39,31 @@ class Discover {
       String withKeywords,
       String withPeople,
       int year}) {
-    Params params = new Params();
-    params.add('certification_country', certificationCountry);
-    params.add('certification', certification);
-    params.add('certification.lte', certificationLTE);
-    params.add('include_Adult', includeAdult);
-    params.add('include_video', includeVideo);
-    params.add('language', language);
-    params.add('page', page);
-    params.add('primary_release_year', primaryReleaseYear);
-    params.add('primary_release_Date.gte', primaryReleaseDateGTE);
-    params.add('primary_release_Date.lte', primaryReleaseDateLTE);
-    params.add('release_date.gte', releaseDateGTE);
-    params.add('release_date.lte', releaseDateLTE);
-    params.add('sort_by', sortBy);
-    params.add('vote_count.gte', voteCountGTE);
-    params.add('vote_count.lte', voteCountLTE);
-    params.add('vote_average.gte', voteAverageGTE);
-    params.add('vote_average.lte', voteAverageLTE);
-    params.add('with_cast', withCast);
-    params.add('with_crew', withCrew);
-    params.add('with_companies', withCompanies);
-    params.add('with_genres', withGenres);
-    params.add('with_keywords', withKeywords);
-    params.add('with_people', withPeople);
-    params.add('year', year);
+    _Params params = new _Params();
+    params['certification_country'] = certificationCountry;
+    params['certification'] = certification;
+    params['certification.lte'] = certificationLTE;
+    params['include_Adult'] = includeAdult;
+    params['include_video'] = includeVideo;
+    params['language'] = language;
+    params['page'] = page;
+    params['primary_release_year'] = primaryReleaseYear;
+    params['primary_release_Date.gte'] = primaryReleaseDateGTE;
+    params['primary_release_Date.lte'] = primaryReleaseDateLTE;
+    params['release_date.gte'] = releaseDateGTE;
+    params['release_date.lte'] = releaseDateLTE;
+    params['sort_by'] = sortBy;
+    params['vote_count.gte'] = voteCountGTE;
+    params['vote_count.lte'] = voteCountLTE;
+    params['vote_average.gte'] = voteAverageGTE;
+    params['vote_average.lte'] = voteAverageLTE;
+    params['with_cast'] = withCast;
+    params['with_crew'] = withCrew;
+    params['with_companies'] = withCompanies;
+    params['with_genres'] = withGenres;
+    params['with_keywords'] = withKeywords;
+    params['with_people'] = withPeople;
+    params['year'] = year;
     return _core._query('dicover/movie', params: params);
   }
 
@@ -84,20 +84,20 @@ class Discover {
       int voteCountGTE,
       String withGenres,
       String withNetworks}) {
-    Params params = new Params();
-    params.add('air_date.gte', airDateGTE);
-    params.add('air_date.lte', airDateLTE);
-    params.add('first_air_date.gte', firstAirDateGTE);
-    params.add('first_air_date.lte', firstAirDateLTE);
-    params.add('first_air_date_year', firstAirDateYear);
-    params.add('language', language);
-    params.add('page', page);
-    params.add('sort_by', sortBy);
-    params.add('timezone', timezone);
-    params.add('vote_average.gte', voteAverageGTE);
-    params.add('vote_count.gte', voteCountGTE);
-    params.add('with_Genres', withGenres);
-    params.add('with_networks', withNetworks);
+    _Params params = new _Params();
+    params['air_date.gte'] = airDateGTE;
+    params['air_date.lte'] = airDateLTE;
+    params['first_air_date.gte'] = firstAirDateGTE;
+    params['first_air_date.lte'] = firstAirDateLTE;
+    params['first_air_date_year'] = firstAirDateYear;
+    params['language'] = language;
+    params['page'] = page;
+    params['sort_by'] = sortBy;
+    params['timezone'] = timezone;
+    params['vote_average.gte'] = voteAverageGTE;
+    params['vote_count.gte'] = voteCountGTE;
+    params['with_Genres'] = withGenres;
+    params['with_networks'] = withNetworks;
 
     return _core._query('discover/tv', params: params);
   }

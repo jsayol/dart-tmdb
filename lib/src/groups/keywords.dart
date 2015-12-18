@@ -29,10 +29,10 @@ class Keywords {
   ///     // Get second page of results
   ///     Map result = await tmdb.keywords.getMovies('878', page: 2);
   Future<Map> getMovies(String id, {int page, String language}) {
-    Params params = new Params();
+    _Params params = new _Params();
     _checkNotNull(id, 'id');
-    params.add('page', page);
-    params.add('language', language);
+    params['page'] = page;
+    params['language'] = language;
     return _core._query('keyword/$id/movies', params: params);
   }
 }
