@@ -19,9 +19,9 @@ class _Params extends Object with MapMixin {
 
   bool get hasElements => _obj.length > 0;
 
-  operator [](String name) => _obj[name];
+  operator [](dynamic name) => _obj[name];
 
-  operator []=(String name, dynamic value) {
+  operator []=(dynamic name, dynamic value) {
     if (value != null) {
       if (value is bool) {
         _obj[name] = value;
@@ -54,6 +54,6 @@ class _Params extends Object with MapMixin {
     return query.join('&');
   }
 
-  String toJSON() => JSON.encode(_obj);
+  String toJSON() => json.encode(_obj);
 
 }
