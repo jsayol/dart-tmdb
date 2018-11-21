@@ -128,7 +128,7 @@ abstract class TMDBApiCore {
 
     try {
       String response = await handleRequest(request);
-      return JSON.decode(response);
+      return json.decode(response);
     } catch (e) {
       // TODO: Handle exceptions
     }
@@ -171,7 +171,7 @@ abstract class TMDBApiCore {
   // }
 
   // Abstract method to be implemented either for dart:html or dart:io.
-  Future<String> handleRequest(Request);
+  Future<String> handleRequest(http.Request request);
 
   Future<String> handleResponse(http.Response response) async {
     if (response.statusCode == 429) {
