@@ -75,21 +75,21 @@ abstract class TMDBApiCore {
       {String method: 'GET', _Params params, bool https: false}) async {
     String query = 'api_key=$_apiKey';
 
-    if (params?.needsSession) {
+    if (params?.needsSession ?? false) {
       if (authentication.sessionId == null) {
         throw new StateError(
             "Can't use this method without having a session ID.");
       } else {
         query += "&session_id=${authentication.sessionId}";
       }
-    } else if (params?.needsGuestSession) {
+    } else if (params?.needsGuestSession ?? false) {
       if (authentication.guestSessionId == null) {
         throw new StateError(
             "Can't use this method without having a guest session ID.");
       } else {
         query += "&guest_session_id=${authentication.guestSessionId}";
       }
-    } else if (params?.needsEitherSession) {
+    } else if (params?.needsEitherSession ?? false) {
       if (authentication.sessionId != null) {
         query += "&session_id=${authentication.sessionId}";
       } else if (authentication.guestSessionId != null) {
@@ -108,7 +108,7 @@ abstract class TMDBApiCore {
     //   params.remove('guest_session_id');
     // }
 
-    if (params?.hasElements && ['GET', 'HEAD', 'DELETE'].contains(method)) {
+    if ((params?.hasElements ?? false) && ['GET', 'HEAD', 'DELETE'].contains(method)) {
       query += '&${params.toString()}';
     }
 
@@ -122,7 +122,7 @@ abstract class TMDBApiCore {
     request.headers['Accept'] = 'application/json';
     request.headers['Content-Type'] = 'application/json';
 
-    if (params?.hasElements && ['POST', 'PUT', 'DELETE'].contains(method)) {
+    if ((params?.hasElements ?? false) && ['POST', 'PUT', 'DELETE'].contains(method)) {
       request.body = params?.toJSON();
     }
 
@@ -130,45 +130,9 @@ abstract class TMDBApiCore {
       String response = await handleRequest(request);
       return json.decode(response);
     } catch (e) {
-      // TODO: Handle exceptions
+      rethrow;
     }
   }
-
-  // Future<Map> _query(String endpoint,
-  //     {String method: 'GET',
-  //     Map<String, String> params,
-  //     _Params params2,
-  //     bool https: false}) async {
-  //   List<String> query = [];
-  //   params ??= new Map<String, String>();
-  //   params['api_key'] = _apiKey;
-  //
-  //   params.forEach((String k, dynamic v) {
-  //     query.add('$k=' + Uri.encodeQueryComponent(v.toString()));
-  //   });
-  //
-  //   Uri url = new Uri(
-  //       scheme: _apiUriHTTPS || https ? 'https' : 'http',
-  //       host: _apiUriHost,
-  //       path: '/$_apiUriVersion/$endpoint');
-  //
-  //   if (['GET', 'HEAD', 'DELETE'].contains(method)) {
-  //     url = url.replace(query: query.join('&'));
-  //   }
-  //
-  //   http.Request request = new http.Request(method, url);
-  //
-  //   if (['POST', 'PUT'].contains(method)) {
-  //     request.body = query.join('&');
-  //   }
-  //
-  //   try {
-  //     String response = await handleRequest(request);
-  //     return JSON.decode(response);
-  //   } catch (e) {
-  //     // TODO: Handle exceptions
-  //   }
-  // }
 
   // Abstract method to be implemented either for dart:html or dart:io.
   Future<String> handleRequest(http.Request request);

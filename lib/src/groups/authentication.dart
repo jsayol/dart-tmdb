@@ -34,7 +34,7 @@ class Authentication {
       return resp['request_token'];
     } else {
       String msg = "Couldn't obtain new token" +
-          (resp?.containsKey('status_message')
+          ((resp?.containsKey('status_message') ?? false)
               ? ': ' + resp['status_message']
               : '');
       throw new Exception(msg);
@@ -63,7 +63,7 @@ class Authentication {
       return resp['request_token'];
     } else {
       String msg = "Couldn't authenticate user '$username'" +
-          (resp?.containsKey('status_message')
+          ((resp?.containsKey('status_message') ?? false)
               ? ': ' + resp['status_message']
               : '');
       throw new Exception(msg);
@@ -85,7 +85,7 @@ class Authentication {
       return resp['session_id'];
     } else {
       String msg = "Couldn't obtain new session ID" +
-          (resp?.containsKey('status_message')
+          ((resp?.containsKey('status_message') ?? false)
               ? ': ' + resp['status_message']
               : '');
       throw new Exception(msg);
@@ -107,7 +107,7 @@ class Authentication {
       return _guestSessionId;
     } else {
       String msg = "Couldn't obtain new guest session ID" +
-          (resp?.containsKey('status_message')
+          ((resp?.containsKey('status_message') ?? false)
               ? ': ' + resp['status_message']
               : '');
       throw new Exception(msg);
